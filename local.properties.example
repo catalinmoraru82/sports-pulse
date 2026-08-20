@@ -1,0 +1,10 @@
+# Copiaza acest fisier ca "local.properties" (langa el) si completeaza valorile tale.
+# local.properties e deja in .gitignore, nu ajunge niciodata pe git.
+
+sdk.dir=/path/catre/Android/sdk
+
+# URL-ul admin-ului tau de pe Vercel + slash la final
+API_BASE_URL=https://sports-admin-azure.vercel.app/
+
+# Aceeasi valoare ca ANDROID_API_KEY din .env.local al admin-ului
+ANDROID_API_KEY=pune-aici-cheia-reala

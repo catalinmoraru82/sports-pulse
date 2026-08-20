@@ -1,0 +1,11 @@
+<resources>
+    <!-- Tema asta e folosita STRICT pentru ecranul de splash nativ (Android 12+ SplashScreen API).
+         Tot restul UI-ului e construit 100% in Jetpack Compose (vezi ui/theme/Theme.kt) -->
+    <style name="Theme.SportsPulse.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.SportsPulse</item>
+    </style>
+
+    <style name="Theme.SportsPulse" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
