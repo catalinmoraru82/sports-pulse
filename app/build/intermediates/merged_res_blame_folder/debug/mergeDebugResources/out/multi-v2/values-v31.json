@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.sportspulse.app-mergeDebugResources-54:/values-v31/values-v31.xml",
+            "map": [
+                {
+                    "source": "/Users/catalinmoraru/.gradle/caches/8.9/transforms/6a30d053fad91cf25150c1c21c3fb15d/transformed/core-splashscreen-1.0.1/res/values-v31/values-v31.xml",
+                    "from": {
+                        "startLines": "2,9",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,473",
+                        "endLines": "8,13",
+                        "endColumns": "12,12",
+                        "endOffsets": "468,697"
+                    }
+                }
+            ]
+        }
+    ]
+}

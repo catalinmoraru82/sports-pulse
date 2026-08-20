@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_orange">#FF6D00</color>
+    <color name="splash_background">#FFFBFE</color>
+    <string name="app_name">SportsPulse</string>
+    <style name="Theme.SportsPulse" parent="android:Theme.Material.Light.NoActionBar"/>
+    <style name="Theme.SportsPulse.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.SportsPulse</item>
+    </style>
+</resources>

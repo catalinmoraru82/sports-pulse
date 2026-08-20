@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Placeholder simplu (un fulger stilizat) - inlocuieste cu logo-ul real din Figma cand e gata -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M58,24 L38,58 L52,58 L46,84 L74,50 L58,50 Z" />
+</vector>
