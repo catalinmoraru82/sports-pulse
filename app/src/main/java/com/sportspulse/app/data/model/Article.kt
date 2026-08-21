@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 data class Article(
     val id: String,
     @SerialName("source_id") val sourceId: String? = null,
+    @SerialName("source_name") val sourceName: String? = null,
     @SerialName("is_manual") val isManual: Boolean = false,
     val title: String,
     val summary: String? = null,

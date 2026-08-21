@@ -1,5 +1,6 @@
 package com.sportspulse.app.ui.screens.settings
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.sportspulse.app.ui.theme.ThemeState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,8 +51,15 @@ fun SettingsScreen() {
                 .padding(20.dp),
         ) {
             SettingsSection(title = "Appearance") {
-                var darkMode by remember { mutableStateOf(false) }
-                ToggleRow(label = "Dark mode", checked = darkMode, onCheckedChange = { darkMode = it })
+                // Legat direct de ThemeState, care e citit din SportsPulseTheme la nivel de app -
+                // schimbarea aici se reflecta imediat in toata aplicatia, nu doar local pe acest ecran.
+                val systemDark = isSystemInDarkTheme()
+                val darkMode = ThemeState.darkModeOverride.value ?: systemDark
+                ToggleRow(
+                    label = "Dark mode",
+                    checked = darkMode,
+                    onCheckedChange = { ThemeState.darkModeOverride.value = it },
+                )
                 LinkRow(label = "Text size", value = "Medium")
             }
 

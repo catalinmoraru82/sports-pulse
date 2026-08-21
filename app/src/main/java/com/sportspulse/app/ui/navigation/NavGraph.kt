@@ -23,7 +23,11 @@ import com.sportspulse.app.ui.screens.sports.SportsScreen
 fun SportsPulseNavGraph(navController: NavHostController = rememberNavController()) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
-    val showBottomBar = bottomNavScreens.any { it.route == currentRoute }
+    // Explicit: bottom nav apare DOAR pe cele 3 tab-uri, niciodata pe ecranul de detaliu articol
+    // (care nu e in bottomNavScreens si oricum incepe cu "article/").
+    val showBottomBar = currentRoute != null &&
+        bottomNavScreens.any { it.route == currentRoute } &&
+        !currentRoute.startsWith("article/")
 
     Scaffold(
         bottomBar = {

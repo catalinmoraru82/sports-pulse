@@ -28,13 +28,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
+import com.sportspulse.app.ui.components.TopBarHeight
 import com.sportspulse.app.ui.components.relativeTime
+import com.sportspulse.app.ui.components.stripHtml
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,6 +64,7 @@ fun ArticleDetailScreen(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                 ),
+                modifier = Modifier.height(TopBarHeight),
             )
         },
     ) { paddingValues ->
@@ -99,7 +103,7 @@ fun ArticleDetailScreen(
                         androidx.compose.foundation.layout.Spacer(Modifier.height(16.dp))
                     }
 
-                    if (!article.section.isNullOrBlank()) {
+                    if (!article.sourceName.isNullOrBlank()) {
                         Box(
                             modifier = Modifier
                                 .background(
@@ -109,7 +113,7 @@ fun ArticleDetailScreen(
                                 .padding(horizontal = 10.dp, vertical = 4.dp),
                         ) {
                             Text(
-                                text = article.section.replaceFirstChar { it.uppercase() },
+                                text = article.sourceName,
                                 style = MaterialTheme.typography.labelLarge,
                                 color = MaterialTheme.colorScheme.primary,
                             )
@@ -146,8 +150,11 @@ fun ArticleDetailScreen(
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                     androidx.compose.foundation.layout.Spacer(Modifier.height(16.dp))
 
+                    val cleanContent = remember(article.content, article.summary) {
+                        stripHtml(article.content ?: article.summary) ?: ""
+                    }
                     Text(
-                        text = article.content ?: article.summary ?: "",
+                        text = cleanContent,
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurface,
                     )

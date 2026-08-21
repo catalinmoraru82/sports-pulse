@@ -10,6 +10,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 
@@ -43,7 +44,8 @@ private val DarkColorScheme = darkColorScheme(
 
 @Composable
 fun SportsPulseTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    // Daca userul a ales explicit din Settings, respectam alegerea lui; altfel urmam sistemul.
+    darkTheme: Boolean = ThemeState.darkModeOverride.value ?: isSystemInDarkTheme(),
     // Material You (culori dinamice din wallpaper) - disponibil din Android 12 (API 31),
     // exact minSdk-ul nostru. Dezactivat implicit ca sa pastram brandul portocaliu
     // consistent; poate fi activat din Settings daca vrei sa oferi optiunea userului.

@@ -17,6 +17,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -74,10 +75,11 @@ fun ArticleCard(
                 overflow = TextOverflow.Ellipsis,
             )
 
-            if (!article.summary.isNullOrBlank()) {
+            val cleanSummary = remember(article.summary) { stripHtml(article.summary) }
+            if (!cleanSummary.isNullOrBlank()) {
                 androidx.compose.foundation.layout.Spacer(Modifier.height(10.dp))
                 Text(
-                    text = article.summary,
+                    text = cleanSummary,
                     style = if (article.isHighlighted) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 3,
@@ -88,7 +90,7 @@ fun ArticleCard(
             androidx.compose.foundation.layout.Spacer(Modifier.height(10.dp))
 
             ArticleMeta(
-                source = article.section?.replaceFirstChar { it.uppercase() },
+                source = article.sourceName,
                 publishedAt = article.publishedAt,
             )
         }
