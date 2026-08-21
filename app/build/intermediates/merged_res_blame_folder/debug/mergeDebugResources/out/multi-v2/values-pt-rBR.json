@@ -4,24 +4,7 @@
             "outputFile": "com.sportspulse.app-mergeDebugResources-54:/values-pt-rBR/values-pt-rBR.xml",
             "map": [
                 {
-                    "source": "/Users/catalinmoraru/.gradle/caches/8.9/transforms/a6bed63dacf12bc48bd5ee076c6c690b/transformed/foundation-release/res/values-pt-rBR/values-pt-rBR.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,138",
-                        "endColumns": "82,84",
-                        "endOffsets": "133,218"
-                    },
-                    "to": {
-                        "startLines": "85,86",
-                        "startColumns": "4,4",
-                        "startOffsets": "8758,8841",
-                        "endColumns": "82,84",
-                        "endOffsets": "8836,8921"
-                    }
-                },
-                {
-                    "source": "/Users/catalinmoraru/.gradle/caches/8.9/transforms/3023a02cac589a9750032bc8f47f188d/transformed/core-1.15.0/res/values-pt-rBR/values-pt-rBR.xml",
+                    "source": "C:\\Users\\Cata\\.gradle\\caches\\8.9\\transforms\\3023a02cac589a9750032bc8f47f188d\\transformed\\core-1.15.0\\res\\values-pt-rBR\\values-pt-rBR.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -38,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/catalinmoraru/.gradle/caches/8.9/transforms/82315cbed806b096fcc4b803b928f65e/transformed/material3-release/res/values-pt-rBR/values-pt-rBR.xml",
+                    "source": "C:\\Users\\Cata\\.gradle\\caches\\8.9\\transforms\\82315cbed806b096fcc4b803b928f65e\\transformed\\material3-release\\res\\values-pt-rBR\\values-pt-rBR.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,7 +38,24 @@
                     }
                 },
                 {
-                    "source": "/Users/catalinmoraru/.gradle/caches/8.9/transforms/7071546176bd07ef5b3d235bfe3454d5/transformed/ui-release/res/values-pt-rBR/values-pt-rBR.xml",
+                    "source": "C:\\Users\\Cata\\.gradle\\caches\\8.9\\transforms\\a6bed63dacf12bc48bd5ee076c6c690b\\transformed\\foundation-release\\res\\values-pt-rBR\\values-pt-rBR.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,138",
+                        "endColumns": "82,84",
+                        "endOffsets": "133,218"
+                    },
+                    "to": {
+                        "startLines": "85,86",
+                        "startColumns": "4,4",
+                        "startOffsets": "8758,8841",
+                        "endColumns": "82,84",
+                        "endOffsets": "8836,8921"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Cata\\.gradle\\caches\\8.9\\transforms\\7071546176bd07ef5b3d235bfe3454d5\\transformed\\ui-release\\res\\values-pt-rBR\\values-pt-rBR.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

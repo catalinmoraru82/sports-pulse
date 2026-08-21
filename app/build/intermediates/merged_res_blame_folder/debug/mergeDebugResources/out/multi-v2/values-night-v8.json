@@ -4,7 +4,7 @@
             "outputFile": "com.sportspulse.app-mergeDebugResources-54:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/catalinmoraru/.gradle/caches/8.9/transforms/6a30d053fad91cf25150c1c21c3fb15d/transformed/core-splashscreen-1.0.1/res/values-night-v8/values-night-v8.xml",
+                    "source": "C:\\Users\\Cata\\.gradle\\caches\\8.9\\transforms\\6a30d053fad91cf25150c1c21c3fb15d\\transformed\\core-splashscreen-1.0.1\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
