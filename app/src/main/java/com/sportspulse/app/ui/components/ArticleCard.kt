@@ -25,12 +25,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.sportspulse.app.data.local.VisitedArticlesStore
 import com.sportspulse.app.data.model.Article
 
 /**
  * Card articol - replica designul din Figma. Are doua variante:
  * - featured (is_highlighted = true): badge "FEATURED" portocaliu, titlu mai mare
  * - normal: fara badge, titlu mai mic
+ *
+ * Fundalul devine usor gri (surfaceContainerHigh) daca articolul a fost deja vizitat -
+ * userul isi da seama dintr-o privire ce a citit deja, chiar dupa ce inchide si redeschide app-ul.
  */
 @Composable
 fun ArticleCard(
@@ -38,12 +42,20 @@ fun ArticleCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Citirea directa a .value face acest Composable sa recompuna automat
+    // cand markVisited() schimba starea global (ex: la intoarcerea din pagina de detaliu).
+    val visited = VisitedArticlesStore.isVisited(article.id)
+
     Card(
         onClick = onClick,
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+            containerColor = if (visited) {
+                MaterialTheme.colorScheme.surfaceContainerHigh
+            } else {
+                MaterialTheme.colorScheme.surfaceContainer
+            },
         ),
         border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),

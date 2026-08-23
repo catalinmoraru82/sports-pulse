@@ -32,9 +32,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
+import com.sportspulse.app.data.local.VisitedArticlesStore
 import com.sportspulse.app.ui.components.TopBarHeight
 import com.sportspulse.app.ui.components.relativeTime
 import com.sportspulse.app.ui.components.stripHtml
@@ -47,9 +49,13 @@ fun ArticleDetailScreen(
     viewModel: ArticleDetailViewModel = viewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     LaunchedEffect(articleId) {
         viewModel.load(articleId)
+        // Marcam vizitat cat mai devreme - userul a "consumat" articolul din momentul
+        // in care a intrat pe pagina, indiferent daca datele s-au incarcat rapid sau nu.
+        VisitedArticlesStore.markVisited(context, articleId)
     }
 
     Scaffold(

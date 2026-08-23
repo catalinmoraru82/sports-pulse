@@ -4,18 +4,25 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -31,19 +38,23 @@ import com.sportspulse.app.ui.components.TopBarHeight
 @Composable
 fun FeedScreen(
     onArticleClick: (articleId: String) -> Unit,
+    onSettingsClick: () -> Unit,
     viewModel: FeedViewModel = viewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
 
     Scaffold(
         topBar = {
             Surface(color = MaterialTheme.colorScheme.surface) {
-                Box(
+                Row(
                     modifier = Modifier
+                        .statusBarsPadding()
                         .fillMaxWidth()
                         .height(TopBarHeight)
                         .padding(horizontal = 16.dp),
-                    contentAlignment = Alignment.CenterStart,
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
                         text = "SportsPulse",
@@ -51,22 +62,33 @@ fun FeedScreen(
                         fontWeight = FontWeight.ExtraBold,
                         style = MaterialTheme.typography.headlineSmall,
                     )
+                    IconButton(onClick = onSettingsClick) {
+                        Icon(
+                            imageVector = Icons.Filled.Settings,
+                            contentDescription = "Setari",
+                            tint = MaterialTheme.colorScheme.onSurface,
+                        )
+                    }
                 }
             }
         },
     ) { paddingValues ->
-        when (val state = uiState) {
-            is FeedUiState.Loading -> LoadingState(paddingValues)
-            is FeedUiState.Error -> ErrorState(paddingValues, state.message, onRetry = { viewModel.loadArticles() })
-            is FeedUiState.Success -> {
-                if (state.articles.isEmpty()) {
-                    EmptyState(paddingValues)
-                } else {
-                    ArticleList(
-                        articles = state.articles,
-                        paddingValues = paddingValues,
-                        onArticleClick = onArticleClick,
-                    )
+        // Continutul e mereu vizibil sub indicator - refresh-ul nu ascunde lista existenta,
+        // doar arata iconita de loading in timp ce se reincarca in fundal.
+        PullToRefreshBox(
+            isRefreshing = isRefreshing,
+            onRefresh = { viewModel.refresh() },
+            modifier = Modifier.fillMaxSize().padding(paddingValues),
+        ) {
+            when (val state = uiState) {
+                is FeedUiState.Loading -> LoadingState()
+                is FeedUiState.Error -> ErrorState(state.message, onRetry = { viewModel.loadArticles() })
+                is FeedUiState.Success -> {
+                    if (state.articles.isEmpty()) {
+                        EmptyState()
+                    } else {
+                        ArticleList(articles = state.articles, onArticleClick = onArticleClick)
+                    }
                 }
             }
         }
@@ -76,13 +98,10 @@ fun FeedScreen(
 @Composable
 private fun ArticleList(
     articles: List<com.sportspulse.app.data.model.Article>,
-    paddingValues: PaddingValues,
     onArticleClick: (String) -> Unit,
 ) {
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues),
+        modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
@@ -96,9 +115,9 @@ private fun ArticleList(
 }
 
 @Composable
-private fun LoadingState(paddingValues: PaddingValues) {
+private fun LoadingState() {
     Box(
-        modifier = Modifier.fillMaxSize().padding(paddingValues),
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
@@ -106,9 +125,9 @@ private fun LoadingState(paddingValues: PaddingValues) {
 }
 
 @Composable
-private fun ErrorState(paddingValues: PaddingValues, message: String, onRetry: () -> Unit) {
+private fun ErrorState(message: String, onRetry: () -> Unit) {
     Box(
-        modifier = Modifier.fillMaxSize().padding(paddingValues).padding(32.dp),
+        modifier = Modifier.fillMaxSize().padding(32.dp),
         contentAlignment = Alignment.Center,
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -126,9 +145,9 @@ private fun ErrorState(paddingValues: PaddingValues, message: String, onRetry: (
 }
 
 @Composable
-private fun EmptyState(paddingValues: PaddingValues) {
+private fun EmptyState() {
     Box(
-        modifier = Modifier.fillMaxSize().padding(paddingValues).padding(32.dp),
+        modifier = Modifier.fillMaxSize().padding(32.dp),
         contentAlignment = Alignment.Center,
     ) {
         Text(

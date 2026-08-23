@@ -11,8 +11,9 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 
 private val LightColorScheme = lightColorScheme(
     primary = OrangePrimaryLight,
@@ -61,10 +62,15 @@ fun SportsPulseTheme(
         else -> LightColorScheme
     }
 
+    // Fundalul barei de status vine deja din edge-to-edge (enableEdgeToEdge() in MainActivity) +
+    // Surface-urile proprii cu statusBarsPadding() - nu mai setam statusBarColor manual (API deprecat).
+    // Controlam doar culoarea iconitelor sistemului (ceas, baterie etc.) sa fie lizibile pe fundal.
     val activity = LocalContext.current as? Activity
-    if (activity != null) {
+    val view = LocalView.current
+    if (activity != null && !view.isInEditMode) {
         SideEffect {
-            activity.window.statusBarColor = colorScheme.surface.toArgb()
+            val controller = WindowCompat.getInsetsController(activity.window, view)
+            controller.isAppearanceLightStatusBars = !darkTheme
         }
     }
 
