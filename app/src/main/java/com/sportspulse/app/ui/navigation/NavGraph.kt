@@ -7,12 +7,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.sportspulse.app.ui.screens.detail.ArticleDetailScreen
 import com.sportspulse.app.ui.screens.feed.FeedScreen
 import com.sportspulse.app.ui.screens.settings.SettingsScreen
+import com.sportspulse.app.ui.screens.webview.ArticleWebViewScreen
 
 // Nu mai avem bottom navigation bar - Feed e ecranul principal, Settings se acceseaza
-// prin iconita din top-right, iar pagina de articol are doar buton "inapoi".
+// prin iconita din top-right. La tap pe un articol, deschidem pagina originala a
+// sursei intr-un WebView in aplicatie - nu mai exista un ecran custom de detaliu.
 @Composable
 fun SportsPulseNavGraph(navController: NavHostController = rememberNavController()) {
     NavHost(
@@ -21,8 +22,11 @@ fun SportsPulseNavGraph(navController: NavHostController = rememberNavController
     ) {
         composable(Screen.Feed.route) {
             FeedScreen(
-                onArticleClick = { articleId ->
-                    navController.navigate(Screen.ArticleDetail.createRoute(articleId))
+                onArticleClick = { article ->
+                    val url = article.originalUrl
+                    if (!url.isNullOrBlank()) {
+                        navController.navigate(Screen.ArticleWebView.createRoute(article.id, url))
+                    }
                 },
                 onSettingsClick = {
                     navController.navigate(Screen.Settings.route)
@@ -33,12 +37,17 @@ fun SportsPulseNavGraph(navController: NavHostController = rememberNavController
             SettingsScreen(onBack = { navController.popBackStack() })
         }
         composable(
-            route = Screen.ArticleDetail.route,
-            arguments = listOf(navArgument("articleId") { type = NavType.StringType }),
+            route = Screen.ArticleWebView.route,
+            arguments = listOf(
+                navArgument("articleId") { type = NavType.StringType },
+                navArgument("encodedUrl") { type = NavType.StringType },
+            ),
         ) { backStackEntry ->
             val articleId = backStackEntry.arguments?.getString("articleId") ?: return@composable
-            ArticleDetailScreen(
+            val encodedUrl = backStackEntry.arguments?.getString("encodedUrl") ?: return@composable
+            ArticleWebViewScreen(
                 articleId = articleId,
+                url = Screen.ArticleWebView.decodeUrl(encodedUrl),
                 onBack = { navController.popBackStack() },
             )
         }

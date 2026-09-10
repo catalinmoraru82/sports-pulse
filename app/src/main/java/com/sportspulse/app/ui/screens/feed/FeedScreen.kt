@@ -31,13 +31,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.sportspulse.app.data.model.Article
 import com.sportspulse.app.ui.components.ArticleCard
 import com.sportspulse.app.ui.components.TopBarHeight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedScreen(
-    onArticleClick: (articleId: String) -> Unit,
+    onArticleClick: (Article) -> Unit,
     onSettingsClick: () -> Unit,
     viewModel: FeedViewModel = viewModel(),
 ) {
@@ -97,8 +98,8 @@ fun FeedScreen(
 
 @Composable
 private fun ArticleList(
-    articles: List<com.sportspulse.app.data.model.Article>,
-    onArticleClick: (String) -> Unit,
+    articles: List<Article>,
+    onArticleClick: (Article) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -108,7 +109,7 @@ private fun ArticleList(
         items(articles, key = { it.id }) { article ->
             ArticleCard(
                 article = article,
-                onClick = { onArticleClick(article.id) },
+                onClick = { onArticleClick(article) },
             )
         }
     }

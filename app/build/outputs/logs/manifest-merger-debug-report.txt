@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:1-31:12
+ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:1-31:12
 MERGED from [androidx.navigation:navigation-common:2.8.4] C:\Users\Cata\.gradle\caches\8.13\transforms\e069478ac5f5813ee6f7afecb533900c\transformed\navigation-common-2.8.4\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.8.4] C:\Users\Cata\.gradle\caches\8.13\transforms\b559d4a354ae5d966565ecf733c8ee5d\transformed\navigation-runtime-2.8.4\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.8.4] C:\Users\Cata\.gradle\caches\8.13\transforms\e2c646f74b5564816362c8623120488c\transformed\navigation-common-ktx-2.8.4\AndroidManifest.xml:2:1-7:12
@@ -68,22 +68,22 @@ MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\Cata\.gradle\caches\8.13\t
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Cata\.gradle\caches\8.13\transforms\a07412bb071dfb97940e78b494b6ac4b\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.exifinterface:exifinterface:1.3.7] C:\Users\Cata\.gradle\caches\8.13\transforms\76feb1e220e84e5fd8e50b1dc30de86d\transformed\exifinterface-1.3.7\AndroidManifest.xml:17:1-24:12
 	package
-		INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
+		INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
+		INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
 	xmlns:tools
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:3:5-51
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
+		INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:5:5-67
+ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:5:5-67
 	android:name
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:5:22-64
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:7:5-29:19
-INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:7:5-29:19
+ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:7:5-29:19
+INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:7:5-29:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.6] C:\Users\Cata\.gradle\caches\8.13\transforms\4de1d3fa9e37f2741de564278d64c1f2\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.6] C:\Users\Cata\.gradle\caches\8.13\transforms\4de1d3fa9e37f2741de564278d64c1f2\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Cata\.gradle\caches\8.13\transforms\41d50111dabf4c0c81cd2ae0c83dfea2\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
@@ -99,53 +99,53 @@ MERGED from [androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Cata\.gr
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cata\.gradle\caches\8.13\transforms\33818b94a36506e4661f46652d193cb4\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cata\.gradle\caches\8.13\transforms\33818b94a36506e4661f46652d193cb4\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
-		INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
+		INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.15.0] C:\Users\Cata\.gradle\caches\8.13\transforms\ffcec8fdbe9492df8324e30cbb2e9e3f\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:13:9-35
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:13:9-35
 	android:label
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:11:9-41
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:11:9-41
 	android:roundIcon
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:12:9-48
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:12:9-48
 	tools:targetApi
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:16:9-29
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:16:9-29
 	android:icon
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:10:9-43
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:10:9-43
 	android:allowBackup
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:9:9-35
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:9:9-35
 	android:theme
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:14:9-56
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:14:9-56
 	android:networkSecurityConfig
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:15:9-69
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:15:9-69
 	android:name
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:8:9-39
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:8:9-39
 activity#com.sportspulse.app.MainActivity
-ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:18:9-28:20
+ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:18:9-28:20
 	android:screenOrientation
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:22:13-49
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:22:13-49
 	android:exported
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:20:13-36
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:20:13-36
 	android:configChanges
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:23:13-87
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:23:13-87
 	android:theme
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:21:13-60
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:21:13-60
 	android:name
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:19:13-41
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:19:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:24:13-27:29
+ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:24:13-27:29
 action#android.intent.action.MAIN
-ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:25:17-69
+ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:25:17-69
 	android:name
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:25:25-66
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:25:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:26:17-77
+ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:26:17-77
 	android:name
-		ADDED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:26:27-74
+		ADDED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml:26:27-74
 uses-sdk
-INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
-INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
+INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
+INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
 MERGED from [androidx.navigation:navigation-common:2.8.4] C:\Users\Cata\.gradle\caches\8.13\transforms\e069478ac5f5813ee6f7afecb533900c\transformed\navigation-common-2.8.4\AndroidManifest.xml:20:5-44
 MERGED from [androidx.navigation:navigation-common:2.8.4] C:\Users\Cata\.gradle\caches\8.13\transforms\e069478ac5f5813ee6f7afecb533900c\transformed\navigation-common-2.8.4\AndroidManifest.xml:20:5-44
 MERGED from [androidx.navigation:navigation-runtime:2.8.4] C:\Users\Cata\.gradle\caches\8.13\transforms\b559d4a354ae5d966565ecf733c8ee5d\transformed\navigation-runtime-2.8.4\AndroidManifest.xml:20:5-44
@@ -273,9 +273,9 @@ MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Cata\.gradle\caches
 MERGED from [androidx.exifinterface:exifinterface:1.3.7] C:\Users\Cata\.gradle\caches\8.13\transforms\76feb1e220e84e5fd8e50b1dc30de86d\transformed\exifinterface-1.3.7\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.exifinterface:exifinterface:1.3.7] C:\Users\Cata\.gradle\caches\8.13\transforms\76feb1e220e84e5fd8e50b1dc30de86d\transformed\exifinterface-1.3.7\AndroidManifest.xml:20:5-22:41
 	android:targetSdkVersion
-		INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
+		INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
+		INJECTED from D:\stuff\news\sports-pulse\app\src\main\AndroidManifest.xml
 activity#androidx.compose.ui.tooling.PreviewActivity
 ADDED from [androidx.compose.ui:ui-tooling-android:1.7.6] C:\Users\Cata\.gradle\caches\8.13\transforms\4de1d3fa9e37f2741de564278d64c1f2\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
 	android:exported
