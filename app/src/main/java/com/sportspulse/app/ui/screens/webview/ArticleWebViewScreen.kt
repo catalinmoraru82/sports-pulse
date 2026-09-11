@@ -6,7 +6,6 @@ import android.webkit.WebViewClient
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,7 +33,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.sportspulse.app.data.local.VisitedArticlesStore
@@ -53,7 +51,6 @@ fun ArticleWebViewScreen(
     val context = LocalContext.current
     var progress by remember { mutableFloatStateOf(0f) }
     var isLoading by remember { mutableStateOf(true) }
-    var pageTitle by remember { mutableStateOf("") }
     var webView by remember { mutableStateOf<WebView?>(null) }
 
     LaunchedEffect(articleId) {
@@ -85,23 +82,12 @@ fun ArticleWebViewScreen(
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Inapoi")
                     }
-                    Column(modifier = Modifier.padding(end = 16.dp)) {
-                        Text(
-                            text = "SportsPulse",
-                            color = MaterialTheme.colorScheme.primary,
-                            fontWeight = FontWeight.ExtraBold,
-                            style = MaterialTheme.typography.headlineSmall,
-                        )
-                        if (pageTitle.isNotBlank()) {
-                            Text(
-                                text = pageTitle,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                style = MaterialTheme.typography.bodySmall,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
-                    }
+                    Text(
+                        text = "SportsPulse",
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.ExtraBold,
+                        style = MaterialTheme.typography.headlineSmall,
+                    )
                 }
             }
         },
@@ -115,7 +101,6 @@ fun ArticleWebViewScreen(
                         webViewClient = object : WebViewClient() {
                             override fun onPageFinished(view: WebView?, finishedUrl: String?) {
                                 isLoading = false
-                                pageTitle = view?.title ?: ""
                             }
                         }
                         webChromeClient = object : WebChromeClient() {
