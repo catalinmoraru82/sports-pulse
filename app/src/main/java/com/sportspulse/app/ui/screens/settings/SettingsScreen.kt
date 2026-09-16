@@ -11,7 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -24,8 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,24 +67,12 @@ fun SettingsScreen(onBack: () -> Unit) {
                     checked = darkMode,
                     onCheckedChange = { ThemeState.darkModeOverride.value = it },
                 )
-                LinkRow(label = "Text size", value = "Medium")
-            }
-
-            androidx.compose.foundation.layout.Spacer(Modifier.height(24.dp))
-
-            SettingsSection(title = "Notifications") {
-                var pushNotifications by remember { mutableStateOf(true) }
-                var matchAlerts by remember { mutableStateOf(false) }
-                ToggleRow(label = "Push notifications", checked = pushNotifications, onCheckedChange = { pushNotifications = it })
-                ToggleRow(label = "Match alerts", checked = matchAlerts, onCheckedChange = { matchAlerts = it })
             }
 
             androidx.compose.foundation.layout.Spacer(Modifier.height(24.dp))
 
             SettingsSection(title = "About") {
-                LinkRow(label = "Version", value = "1.0.0")
-                LinkRow(label = "Terms of Service", showChevron = true)
-                LinkRow(label = "Privacy Policy", showChevron = true)
+                LinkRow(label = "Termeni și condiții", showChevron = true)
             }
         }
     }
@@ -139,7 +125,7 @@ private fun LinkRow(label: String, value: String? = null, showChevron: Boolean =
             }
             if (showChevron) {
                 Icon(
-                    Icons.Filled.ChevronRight,
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
