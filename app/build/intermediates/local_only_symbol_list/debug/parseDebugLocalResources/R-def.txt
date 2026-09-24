@@ -1,9 +1,10 @@
 R_DEF: Internal format may change without notice
 local
-color brand_orange
+color brand_accent
 color splash_background
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+font outfit
 mipmap ic_launcher
 string app_name
 style Theme.SportsPulse

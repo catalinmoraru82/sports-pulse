@@ -1,5 +1,6 @@
 package com.sportspulse.app.ui.screens.settings
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,12 +29,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.sportspulse.app.ui.components.ForceStatusBarIcons
 import com.sportspulse.app.ui.components.TopBarHeight
 import com.sportspulse.app.ui.theme.ThemeState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(onBack: () -> Unit) {
+fun SettingsScreen(onBack: () -> Unit, onTermsClick: () -> Unit) {
+    // Fundalul acestui ecran urmeaza tema normal (spre deosebire de Feed/WebView, care
+    // au banda neagra fixa) - reafirmam explicit iconitele corecte pt tema curenta,
+    // altfel ar ramane cele albe fortate de ecranul anterior (Feed).
+    val darkTheme = ThemeState.darkModeOverride.value ?: isSystemInDarkTheme()
+    ForceStatusBarIcons(useLightIcons = darkTheme)
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -72,7 +79,7 @@ fun SettingsScreen(onBack: () -> Unit) {
             androidx.compose.foundation.layout.Spacer(Modifier.height(24.dp))
 
             SettingsSection(title = "About") {
-                LinkRow(label = "Termeni și condiții", showChevron = true)
+                LinkRow(label = "Termeni și condiții", showChevron = true, onClick = onTermsClick)
             }
         }
     }
@@ -110,11 +117,12 @@ private fun ToggleRow(label: String, checked: Boolean, onCheckedChange: (Boolean
 }
 
 @Composable
-private fun LinkRow(label: String, value: String? = null, showChevron: Boolean = false) {
+private fun LinkRow(label: String, value: String? = null, showChevron: Boolean = false, onClick: (() -> Unit)? = null) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(51.dp),
+            .height(51.dp)
+            .let { if (onClick != null) it.clickable(onClick = onClick) else it },
         horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {

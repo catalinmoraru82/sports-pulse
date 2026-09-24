@@ -60,51 +60,53 @@ fun ArticleCard(
         border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-
+        Column {
             if (!article.imageUrl.isNullOrBlank()) {
+                // Imaginea e acum in afara padding-ului cardului, edge-to-edge (stanga/
+                // dreapta/sus) - efect de "cover". Card-ul din Material3 isi clip-uieste
+                // automat continutul dupa shape-ul propriu, deci coltul de sus ramane rotunjit.
                 AsyncImage(
                     model = article.imageUrl,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
-                        .padding(bottom = 12.dp),
+                        .height(200.dp),
                 )
             }
 
-            if (article.isHighlighted) {
-                FeaturedBadge()
-                androidx.compose.foundation.layout.Spacer(Modifier.height(10.dp))
-            }
+            Column(modifier = Modifier.padding(16.dp)) {
+                if (article.isHighlighted) {
+                    FeaturedBadge()
+                    androidx.compose.foundation.layout.Spacer(Modifier.height(10.dp))
+                }
 
-            Text(
-                text = article.title,
-                style = if (article.isHighlighted) MaterialTheme.typography.titleLarge else MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-                maxLines = 3,
-                overflow = TextOverflow.Ellipsis,
-            )
-
-            val cleanSummary = remember(article.summary) { stripHtml(article.summary) }
-            if (!cleanSummary.isNullOrBlank()) {
-                androidx.compose.foundation.layout.Spacer(Modifier.height(10.dp))
                 Text(
-                    text = cleanSummary,
-                    style = if (article.isHighlighted) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 3,
+                    text = article.title,
+                    style = if (article.isHighlighted) MaterialTheme.typography.titleLarge else MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 5,
                     overflow = TextOverflow.Ellipsis,
                 )
+
+                val cleanSummary = remember(article.summary) { stripHtml(article.summary) }
+                if (!cleanSummary.isNullOrBlank()) {
+                    androidx.compose.foundation.layout.Spacer(Modifier.height(10.dp))
+                    Text(
+                        text = cleanSummary,
+                        style = if (article.isHighlighted) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+
+                androidx.compose.foundation.layout.Spacer(Modifier.height(10.dp))
+
+                ArticleMeta(
+                    source = article.sourceName,
+                    publishedAt = article.publishedAt,
+                )
             }
-
-            androidx.compose.foundation.layout.Spacer(Modifier.height(10.dp))
-
-            ArticleMeta(
-                source = article.sourceName,
-                publishedAt = article.publishedAt,
-            )
         }
     }
 }

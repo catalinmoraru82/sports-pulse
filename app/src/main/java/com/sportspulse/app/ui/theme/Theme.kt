@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val LightColorScheme = lightColorScheme(
-    primary = OrangePrimaryLight,
+    primary = AccentGreenLight,
     onPrimary = OnPrimaryLight,
     surface = SurfaceLight,
     surfaceContainer = SurfaceContainerLight,
@@ -30,7 +30,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = OrangePrimaryDark,
+    primary = AccentGreenDark,
     onPrimary = OnPrimaryDark,
     surface = SurfaceDark,
     surfaceContainer = SurfaceContainerDark,
@@ -48,7 +48,7 @@ fun SportsPulseTheme(
     // Daca userul a ales explicit din Settings, respectam alegerea lui; altfel urmam sistemul.
     darkTheme: Boolean = ThemeState.darkModeOverride.value ?: isSystemInDarkTheme(),
     // Material You (culori dinamice din wallpaper) - disponibil din Android 12 (API 31),
-    // exact minSdk-ul nostru. Dezactivat implicit ca sa pastram brandul portocaliu
+    // exact minSdk-ul nostru. Dezactivat implicit ca sa pastram brandul verde
     // consistent; poate fi activat din Settings daca vrei sa oferi optiunea userului.
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit,

@@ -4,7 +4,7 @@
             "outputFile": "com.sportspulse.app-mergeDebugResources-54:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Cata\\.gradle\\caches\\8.13\\transforms\\ff3ebffee34a468ee5df2333f2658e71\\transformed\\core-splashscreen-1.0.1\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "source": "D:\\stuff\\news\\sports-pulse\\.gradle\\caches\\8.13\\transforms\\ff3ebffee34a468ee5df2333f2658e71\\transformed\\core-splashscreen-1.0.1\\res\\values-watch-v20\\values-watch-v20.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

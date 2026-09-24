@@ -1,76 +1,95 @@
 package com.sportspulse.app.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.sportspulse.app.R
 
-// Figma foloseste fontul "Inter" in mai multe greutati (Regular/Medium/Bold/ExtraBold).
-// FontFamily.Default (Roboto) e folosit ca fallback pana adaugi fisierele .ttf de Inter
-// in res/font/ - vezi nota de mai jos.
+// Un singur font in toata aplicatia: Outfit (extras din fisierul Figma), la cererea ta.
+// E font variabil (un singur .ttf acopera toate greutatile). Setam explicit axa de
+// variatie 'wght' pt fiecare instanta (FontVariation.weight) - doar declararea
+// parametrului "weight" la Font() nu garanteaza intotdeauna interpolarea corecta
+// pe toate device-urile, testele au aratat text randat mereu la aceeasi greutate
+// implicita indiferent ce era declarat. Asa e garantat sa foloseasca greutatea corecta.
 //
-// CA SA FOLOSESTI CHIAR FONTUL INTER (recomandat, ca sa arate identic cu Figma):
-// 1. Descarca Inter de pe https://fonts.google.com/specimen/Inter
-// 2. Pune fisierele .ttf in app/src/main/res/font/ (inter_regular.ttf, inter_medium.ttf,
-//    inter_bold.ttf, inter_extrabold.ttf)
-// 3. Inlocuieste FontFamily.Default de mai jos cu:
-//    FontFamily(Font(R.font.inter_regular, FontWeight.Normal), Font(R.font.inter_medium, FontWeight.Medium), ...)
-val InterFontFamily = FontFamily.Default
+// FontVariation e inca marcata experimentala de Compose (poate sa se schimbe in
+// versiuni viitoare de bbiblioteca), dar functioneaza normal - @OptIn confirma ca
+// acceptam asta constient.
+//
+// Licenta OFL e in /licenses la radacina proiectului.
+@OptIn(ExperimentalTextApi::class)
+val OutfitFontFamily = FontFamily(
+    Font(R.font.outfit, weight = FontWeight.Normal, variationSettings = FontVariation.Settings(FontVariation.weight(400))),
+    Font(R.font.outfit, weight = FontWeight.Medium, variationSettings = FontVariation.Settings(FontVariation.weight(500))),
+    Font(R.font.outfit, weight = FontWeight.SemiBold, variationSettings = FontVariation.Settings(FontVariation.weight(600))),
+    Font(R.font.outfit, weight = FontWeight.Bold, variationSettings = FontVariation.Settings(FontVariation.weight(700))),
+    Font(R.font.outfit, weight = FontWeight.ExtraBold, variationSettings = FontVariation.Settings(FontVariation.weight(800))),
+)
 
 val AppTypography = Typography(
-    // Titlu brand ("SportsPulse" in top app bar) - 20px ExtraBold in Figma
+    // Titlu brand ("SportsPulse" in top app bar) - ExtraBold
     headlineSmall = TextStyle(
-        fontFamily = InterFontFamily,
+        fontFamily = OutfitFontFamily,
         fontWeight = FontWeight.ExtraBold,
         fontSize = 20.sp,
         lineHeight = 24.sp,
     ),
-    // Titlu articol featured - 18px ExtraBold
+    // Titlu articol featured - ExtraBold (crescut de la Bold, era greu de citit)
     titleLarge = TextStyle(
-        fontFamily = InterFontFamily,
+        fontFamily = OutfitFontFamily,
         fontWeight = FontWeight.ExtraBold,
         fontSize = 18.sp,
         lineHeight = 22.sp,
     ),
-    // Titlu articol normal - 16px Bold
+    // Titlu articol normal - Bold (crescut de la SemiBold, era greu de citit)
     titleMedium = TextStyle(
-        fontFamily = InterFontFamily,
-        fontWeight = FontWeight.Bold,
+        fontFamily = OutfitFontFamily,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
-        lineHeight = 21.sp,
+        lineHeight = 22.sp,
     ),
-    // Corp text (rezumat articol featured) - 14px Regular
+    // Corp text (rezumat articol featured) - SemiBold (crescut de la Medium)
     bodyLarge = TextStyle(
-        fontFamily = InterFontFamily,
+        fontFamily = OutfitFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
+        fontSize = 16.sp,
+        lineHeight = 23.sp,
+    ),
+    // Corp text mic (rezumat articol normal) - SemiBold
+    bodyMedium = TextStyle(
+        fontFamily = OutfitFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 15.sp,
         lineHeight = 21.sp,
     ),
-    // Corp text mic (rezumat articol normal) - 13px Regular
-    bodyMedium = TextStyle(
-        fontFamily = InterFontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 13.sp,
+    bodySmall = TextStyle(
+        fontFamily = OutfitFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 12.sp,
         lineHeight = 18.sp,
     ),
-    // Meta info (sursa, timp) - 12px
+    // Meta info (sursa, timp) - SemiBold->Bold, era prea subtire la citit
     labelMedium = TextStyle(
-        fontFamily = InterFontFamily,
+        fontFamily = OutfitFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 12.sp,
         lineHeight = 16.sp,
     ),
     labelSmall = TextStyle(
-        fontFamily = InterFontFamily,
-        fontWeight = FontWeight.Medium,
+        fontFamily = OutfitFontFamily,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 12.sp,
         lineHeight = 16.sp,
     ),
-    // Badge "Featured" - 11px ExtraBold uppercase
+    // Badge "Featured"
     labelLarge = TextStyle(
-        fontFamily = InterFontFamily,
-        fontWeight = FontWeight.ExtraBold,
+        fontFamily = OutfitFontFamily,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 11.sp,
         lineHeight = 14.sp,
     ),

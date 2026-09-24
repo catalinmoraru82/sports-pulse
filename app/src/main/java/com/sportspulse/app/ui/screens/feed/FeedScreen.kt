@@ -33,7 +33,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sportspulse.app.data.model.Article
 import com.sportspulse.app.ui.components.ArticleCard
+import com.sportspulse.app.ui.components.ForceStatusBarIcons
 import com.sportspulse.app.ui.components.TopBarHeight
+import com.sportspulse.app.ui.theme.OnTopBarBlack
+import com.sportspulse.app.ui.theme.TopBarBlack
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,9 +48,16 @@ fun FeedScreen(
     val uiState by viewModel.uiState.collectAsState()
     val isRefreshing by viewModel.isRefreshing.collectAsState()
 
+    // Banda de sus e mereu neagra (vezi mai jos) - iconitele barei de sistem trebuie
+    // sa ramana deschise la culoare pe acest ecran, indiferent de tema aleasa.
+    ForceStatusBarIcons(useLightIcons = true)
+
     Scaffold(
         topBar = {
-            Surface(color = MaterialTheme.colorScheme.surface) {
+            // Banda de sus e mereu neagra (culoare fixa, nu MaterialTheme.colorScheme.surface) -
+            // pe light theme verdele nu se vedea bine pe fundal alb, asta il pastreaza lizibil
+            // pe ambele teme.
+            Surface(color = TopBarBlack) {
                 Row(
                     modifier = Modifier
                         .statusBarsPadding()
@@ -67,7 +77,7 @@ fun FeedScreen(
                         Icon(
                             imageVector = Icons.Filled.Settings,
                             contentDescription = "Setari",
-                            tint = MaterialTheme.colorScheme.onSurface,
+                            tint = OnTopBarBlack,
                         )
                     }
                 }

@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.sportspulse.app.ui.screens.feed.FeedScreen
 import com.sportspulse.app.ui.screens.settings.SettingsScreen
+import com.sportspulse.app.ui.screens.terms.TermsScreen
 import com.sportspulse.app.ui.screens.webview.ArticleWebViewScreen
 
 // Nu mai avem bottom navigation bar - Feed e ecranul principal, Settings se acceseaza
@@ -34,7 +35,13 @@ fun SportsPulseNavGraph(navController: NavHostController = rememberNavController
             )
         }
         composable(Screen.Settings.route) {
-            SettingsScreen(onBack = { navController.popBackStack() })
+            SettingsScreen(
+                onBack = { navController.popBackStack() },
+                onTermsClick = { navController.navigate(Screen.Terms.route) },
+            )
+        }
+        composable(Screen.Terms.route) {
+            TermsScreen(onBack = { navController.popBackStack() })
         }
         composable(
             route = Screen.ArticleWebView.route,

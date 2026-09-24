@@ -39,4 +39,16 @@ class ArticleRepository(
             ArticlesResult.Error("A aparut o eroare neasteptata.")
         }
     }
+
+    // Trimite un "view" catre admin cand userul deschide un articol. Esuat silentios -
+    // nu vrem ca o problema de retea la tracking sa afecteze experienta de citit.
+    suspend fun markViewed(articleId: String) {
+        withContext(Dispatchers.IO) {
+            try {
+                api.markViewed(articleId)
+            } catch (_: Exception) {
+                // ignorat intentionat
+            }
+        }
+    }
 }

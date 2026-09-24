@@ -6,6 +6,7 @@ import java.net.URLEncoder
 sealed class Screen(val route: String) {
     data object Feed : Screen("feed")
     data object Settings : Screen("settings")
+    data object Terms : Screen("terms")
 
     // Deschide articolul original in WebView, in interiorul aplicatiei - nu mai
     // avem ecran custom de detaliu. URL-ul e codificat ca sa poata trece prin ruta

@@ -47,7 +47,7 @@ attr windowSplashScreenBackground
 attr windowSplashScreenIconBackgroundColor
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
-color brand_orange
+color brand_accent
 color call_notification_answer_color
 color call_notification_decline_color
 color notification_action_color_filter
@@ -109,6 +109,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+font outfit
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
 id accessibility_custom_action_1

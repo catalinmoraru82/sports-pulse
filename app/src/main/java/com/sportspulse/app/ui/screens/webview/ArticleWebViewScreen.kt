@@ -38,6 +38,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.sportspulse.app.data.local.VisitedArticlesStore
+import com.sportspulse.app.data.repository.ArticleRepository
+import com.sportspulse.app.ui.components.ForceStatusBarIcons
+import com.sportspulse.app.ui.theme.OnTopBarBlack
+import com.sportspulse.app.ui.theme.TopBarBlack
 
 /**
  * Deschide articolul original al sursei direct in aplicatie, intr-un WebView - nu mai
@@ -49,6 +53,7 @@ fun ArticleWebViewScreen(
     articleId: String,
     url: String,
     onBack: () -> Unit,
+    repository: ArticleRepository = remember { ArticleRepository() },
 ) {
     val context = LocalContext.current
     var progress by remember { mutableFloatStateOf(0f) }
@@ -58,7 +63,14 @@ fun ArticleWebViewScreen(
     LaunchedEffect(articleId) {
         // Marcam vizitat imediat ce userul intra pe pagina, la fel ca inainte.
         VisitedArticlesStore.markVisited(context, articleId)
+        // Inregistram si un "view" in admin - functia interna esueaza silentios
+        // daca nu merge reteaua, nu blocheaza nimic din UI.
+        repository.markViewed(articleId)
     }
+
+    // Banda de sus e mereu neagra (vezi mai jos) - iconitele barei de sistem trebuie
+    // sa ramana deschise la culoare, indiferent de tema.
+    ForceStatusBarIcons(useLightIcons = true)
 
     // Butonul "inapoi" (hardware/gest) navigheaza prima data in istoricul WebView-ului,
     // ca intr-un browser normal - doar cand nu mai are unde sa navigheze inapoi in
@@ -72,7 +84,7 @@ fun ArticleWebViewScreen(
             // Bara custom, nu TopAppBar standard - avem nevoie de 2 linii (logo +
             // titlul articolului), asa ca inaltimea se adapteaza automat la continut
             // in loc sa fie fixa. Iconita de back e centrata pe toata inaltimea barei.
-            Surface(color = MaterialTheme.colorScheme.surface) {
+            Surface(color = TopBarBlack) {
                 Row(
                     modifier = Modifier
                         .statusBarsPadding()
@@ -83,7 +95,11 @@ fun ArticleWebViewScreen(
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = onBack) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Inapoi")
+                            Icon(
+                                Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Inapoi",
+                                tint = OnTopBarBlack,
+                            )
                         }
                         Text(
                             text = "SportsPulse",
@@ -101,7 +117,7 @@ fun ArticleWebViewScreen(
                             context.startActivity(Intent.createChooser(sendIntent, null))
                         },
                     ) {
-                        Icon(Icons.Filled.Share, contentDescription = "Trimite")
+                        Icon(Icons.Filled.Share, contentDescription = "Trimite", tint = OnTopBarBlack)
                     }
                 }
             }

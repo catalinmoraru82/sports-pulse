@@ -14,5 +14,9 @@
     {
         "merged": "com.sportspulse.app-debug-56:/xml_network_security_config.xml.flat",
         "source": "com.sportspulse.app-main-58:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "com.sportspulse.app-debug-56:/font_outfit.ttf.flat",
+        "source": "com.sportspulse.app-main-58:/font/outfit.ttf"
     }
 ]

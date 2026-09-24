@@ -1,4 +1,4 @@
 <resources>
     <color name="splash_background">#FFFBFE</color>
-    <color name="brand_orange">#FF6719</color>
+    <color name="brand_accent">#C5F900</color>
 </resources>
