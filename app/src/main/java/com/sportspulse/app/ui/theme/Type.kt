@@ -35,7 +35,7 @@ val AppTypography = Typography(
     // Titlu brand ("SportsPulse" in top app bar) - ExtraBold
     headlineSmall = TextStyle(
         fontFamily = OutfitFontFamily,
-        fontWeight = FontWeight.ExtraBold,
+        fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
         lineHeight = 24.sp,
     ),
@@ -44,28 +44,28 @@ val AppTypography = Typography(
         fontFamily = OutfitFontFamily,
         fontWeight = FontWeight.ExtraBold,
         fontSize = 18.sp,
-        lineHeight = 22.sp,
+        lineHeight = 23.sp,
     ),
     // Titlu articol normal - Bold (crescut de la SemiBold, era greu de citit)
     titleMedium = TextStyle(
         fontFamily = OutfitFontFamily,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 16.sp,
-        lineHeight = 22.sp,
+        fontWeight = FontWeight.Bold,
+        fontSize = 17.sp,
+        lineHeight = 23.sp,
     ),
     // Corp text (rezumat articol featured) - SemiBold (crescut de la Medium)
     bodyLarge = TextStyle(
         fontFamily = OutfitFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontSize = 17.sp,
         lineHeight = 23.sp,
     ),
     // Corp text mic (rezumat articol normal) - SemiBold
     bodyMedium = TextStyle(
         fontFamily = OutfitFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 15.sp,
-        lineHeight = 21.sp,
+        fontSize = 17.sp,
+        lineHeight = 23.sp,
     ),
     bodySmall = TextStyle(
         fontFamily = OutfitFontFamily,

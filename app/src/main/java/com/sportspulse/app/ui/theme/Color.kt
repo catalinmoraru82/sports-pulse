@@ -1,5 +1,6 @@
 package com.sportspulse.app.ui.theme
 
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.ui.graphics.Color
 
 // ============================================================
@@ -25,8 +26,7 @@ val SurfaceContainerLight = Color(0xFFF2F2F5)
 // Ton pt cardurile "deja vizitate" - vizibil mai gri decat cardul normal de mai sus.
 val SurfaceContainerHighLight = Color(0xFFE5E5EA)
 val OnSurfaceLight = Color(0xFF1C1B1F)
-//val OnSurfaceVariantLight = Color(0xFF5F6368)
-val OnSurfaceVariantLight = Color(0xFFFFFFFF)
+val OnSurfaceVariantLight = Color(0xFF000000)
 val OutlineVariantLight = Color(0xFFE7E0EC)
 val ErrorLight = Color(0xFFBA1A1A)
 
@@ -42,7 +42,8 @@ val SurfaceContainerDark = Color(0xFF121418)
 // barei de progres neincarcate, #1A1D24), usor mai deschis decat containerul normal.
 val SurfaceContainerHighDark = Color(0xFF1A1D24)
 val OnSurfaceDark = Color(0xFFE6E1E5)
-val OnSurfaceVariantDark = Color(0xFF8E939E)
+val OnSurfaceVariantDark = Color(0xFFFFFFFF)
+//val OnSurfaceVariantDark = Color(0xFF8E939E)
 val OutlineVariantDark = Color(0xFF1F232B)
 val ErrorDark = Color(0xFFFFB4AB)
 

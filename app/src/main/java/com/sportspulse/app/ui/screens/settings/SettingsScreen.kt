@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.sportspulse.app.ui.components.ForceStatusBarIcons
 import com.sportspulse.app.ui.components.TopBarHeight
 import com.sportspulse.app.ui.theme.ThemeState
+import com.sportspulse.app.ui.theme.TopBarBlack
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
