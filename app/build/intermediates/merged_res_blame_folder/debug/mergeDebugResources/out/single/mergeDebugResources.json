@@ -1,22 +1,30 @@
 [
     {
-        "merged": "com.sportspulse.app-debug-56:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.sportspulse.app-main-58:/mipmap-anydpi-v26/ic_launcher.xml"
-    },
-    {
         "merged": "com.sportspulse.app-debug-56:/drawable_ic_launcher_background.xml.flat",
         "source": "com.sportspulse.app-main-58:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "com.sportspulse.app-debug-56:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.sportspulse.app-main-58:/drawable/ic_launcher_foreground.xml"
+        "merged": "com.sportspulse.app-debug-56:/drawable-nodpi_ic_launcher_foreground.png.flat",
+        "source": "com.sportspulse.app-main-58:/drawable-nodpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "com.sportspulse.app-debug-56:/xml_network_security_config.xml.flat",
-        "source": "com.sportspulse.app-main-58:/xml/network_security_config.xml"
+        "merged": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-debug-56:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-main-58:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "com.sportspulse.app-debug-56:/font_outfit.ttf.flat",
-        "source": "com.sportspulse.app-main-58:/font/outfit.ttf"
+        "merged": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-debug-56:\\drawable_ic_launcher_background.xml.flat",
+        "source": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-main-58:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-debug-56:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-main-58:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-debug-56:\\xml_network_security_config.xml.flat",
+        "source": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-main-58:\\xml\\network_security_config.xml"
+    },
+    {
+        "merged": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-debug-56:\\font_outfit.ttf.flat",
+        "source": "D:\\stuff\\news\\sports-pulse\\.gradle\\daemon\\8.13\\com.sportspulse.app-main-58:\\font\\outfit.ttf"
     }
 ]

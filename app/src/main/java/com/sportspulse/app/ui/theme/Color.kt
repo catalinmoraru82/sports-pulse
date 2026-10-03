@@ -25,7 +25,8 @@ val SurfaceContainerLight = Color(0xFFF2F2F5)
 // Ton pt cardurile "deja vizitate" - vizibil mai gri decat cardul normal de mai sus.
 val SurfaceContainerHighLight = Color(0xFFE5E5EA)
 val OnSurfaceLight = Color(0xFF1C1B1F)
-val OnSurfaceVariantLight = Color(0xFF5F6368)
+//val OnSurfaceVariantLight = Color(0xFF5F6368)
+val OnSurfaceVariantLight = Color(0xFFFFFFFF)
 val OutlineVariantLight = Color(0xFFE7E0EC)
 val ErrorLight = Color(0xFFBA1A1A)
 

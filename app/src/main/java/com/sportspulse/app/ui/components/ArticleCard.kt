@@ -96,6 +96,7 @@ fun ArticleCard(
                         text = cleanSummary,
                         style = if (article.isHighlighted) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 7,
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
