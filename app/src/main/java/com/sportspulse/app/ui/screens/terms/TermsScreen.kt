@@ -1,23 +1,25 @@
 package com.sportspulse.app.ui.screens.terms
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -76,17 +78,22 @@ private val TERMS_SECTIONS = listOf(
             "servere terțe în scop de profilare sau publicitate comportamentală.",
     ),
     TermsSection(
-        "5. Publicitate",
-        "Aplicația este gratuită. Pentru susținerea serviciului, Sports Pulse poate afișa, în " +
-            "prezent sau în viitor, reclame furnizate de rețele de publicitate terțe. Afișarea " +
-            "reclamelor nu implică activități de tracking al comportamentului individual al " +
-            "utilizatorului din partea Sports Pulse; orice date colectate strict în scopul " +
-            "livrării reclamelor sunt gestionate exclusiv de furnizorii respectivi de " +
-            "publicitate, potrivit propriilor politici de confidențialitate, pe care vă " +
-            "recomandăm să le consultați.\n\n" +
-            "Sports Pulse nu girează și nu își asumă responsabilitatea pentru produsele, " +
-            "serviciile sau conținutul promovat prin materialele publicitare afișate în " +
-            "Aplicație.",
+        "5. Publicitate și conținut sponsorizat",
+        "Aplicația este gratuită. Pentru susținerea serviciului, Sports Pulse poate publica, în " +
+            "prezent sau în viitor, postări de tip conținut sponsorizat (\"reclame\"), introduse " +
+            "direct prin platforma proprie de administrare a conținutului - nu printr-un SDK sau o " +
+            "rețea de publicitate terță (de exemplu Google AdMob sau similare). Aceste postări apar " +
+            "in Aplicație similar cu un articol obișnuit, marcate vizual ca fiind sponsorizate; la " +
+            "deschidere, redirecționează către pagina sponsorului, afișată în vizualizatorul intern " +
+            "(WebView) al Aplicației, exact ca la articolele obișnuite (secțiunea 4).\n\n" +
+            "Deoarece acest conținut este gestionat direct de Sports Pulse, el nu implică colectarea " +
+            "de identificatori de publicitate ai dispozitivului (de exemplu Advertising ID) și nu " +
+            "presupune profilare comportamentală din partea unor rețele terțe de publicitate. " +
+            "Eventualele statistici de vizualizare ale acestor postări sunt gestionate identic cu " +
+            "cele pentru articolele obișnuite (secțiunea 3) - anonim, fără asociere cu o identitate " +
+            "personală.\n\n" +
+            "Sports Pulse nu girează și nu își asumă responsabilitatea pentru produsele, serviciile " +
+            "sau conținutul promovat prin postările sponsorizate.",
     ),
     TermsSection(
         "6. Notificări",
@@ -142,12 +149,13 @@ private val TERMS_SECTIONS = listOf(
     ),
     TermsSection(
         "12. Contact",
+        // Adresa de email scoasa temporar (la fel ca in page.tsx din admin) - owner-ul nu
+        // vrea sa publice un email personal momentan, o adauga mai tarziu cand are una dedicata.
         "Pentru întrebări, sugestii sau reclamații legate de funcționarea Aplicației, ne puteți " +
-            "contacta la adresa:\nEmail: [completați adresa de email de contact]",
+            "contacta prin informațiile disponibile în fișa aplicației din Google Play.",
     ),
 )
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TermsScreen(onBack: () -> Unit) {
     val darkTheme = ThemeState.darkModeOverride.value ?: isSystemInDarkTheme()
@@ -155,18 +163,31 @@ fun TermsScreen(onBack: () -> Unit) {
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text("Termeni și condiții") },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
+            // Bara custom, la fel ca in FeedScreen/SettingsScreen - NU CenterAlignedTopAppBar.
+            // Acel component isi aplica singur statusBarsPadding intern; combinat cu
+            // Modifier.height(TopBarHeight) fortat din exterior, titlul era strivit langa bara
+            // de status si aparea "foarte sus" in loc sa fie centrat pe cele 64dp.
+            Surface(color = MaterialTheme.colorScheme.surface) {
+                Box(
+                    modifier = Modifier
+                        .statusBarsPadding()
+                        .fillMaxWidth()
+                        .height(TopBarHeight),
+                ) {
+                    IconButton(
+                        onClick = onBack,
+                        modifier = Modifier.align(Alignment.CenterStart),
+                    ) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Inapoi")
                     }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
-                ),
-                modifier = Modifier.height(TopBarHeight),
-            )
+                    Text(
+                        text = "Termeni și condiții",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.align(Alignment.Center),
+                    )
+                }
+            }
         },
     ) { paddingValues ->
         Column(
@@ -183,9 +204,8 @@ fun TermsScreen(onBack: () -> Unit) {
                 color = MaterialTheme.colorScheme.onSurface,
             )
             Text(
-                text = "[Notă: completați aici denumirea completă a firmei/entității juridice " +
-                    "care operează aplicația (SRL, PFA etc.) și datele sale de identificare, de " +
-                    "îndată ce vor fi disponibile.]",
+                text = "Aplicația este dezvoltată și operată de Cătălin Moraru, persoană fizică, nu de " +
+                    "o societate comercială înregistrată.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 8.dp),
