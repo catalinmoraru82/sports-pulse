@@ -62,7 +62,7 @@ fun SettingsScreen(onBack: () -> Unit, onTermsClick: () -> Unit) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Inapoi")
                     }
                     Text(
-                        text = "Settings",
+                        text = "Setări",
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.align(Alignment.Center),
@@ -78,7 +78,7 @@ fun SettingsScreen(onBack: () -> Unit, onTermsClick: () -> Unit) {
                 .verticalScroll(rememberScrollState())
                 .padding(20.dp),
         ) {
-            SettingsSection(title = "Appearance") {
+            SettingsSection(title = "Aspect") {
                 // Legat direct de ThemeState, care e citit din SportsPulseTheme la nivel de app -
                 // schimbarea aici se reflecta imediat in toata aplicatia, nu doar local pe acest ecran.
                 val systemDark = isSystemInDarkTheme()
@@ -92,7 +92,7 @@ fun SettingsScreen(onBack: () -> Unit, onTermsClick: () -> Unit) {
 
             androidx.compose.foundation.layout.Spacer(Modifier.height(24.dp))
 
-            SettingsSection(title = "About") {
+            SettingsSection(title = "Info") {
                 LinkRow(label = "Termeni și condiții", showChevron = true, onClick = onTermsClick)
             }
         }

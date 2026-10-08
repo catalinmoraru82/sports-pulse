@@ -5,11 +5,10 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
@@ -40,6 +39,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.sportspulse.app.data.local.VisitedArticlesStore
 import com.sportspulse.app.data.repository.ArticleRepository
 import com.sportspulse.app.ui.components.ForceStatusBarIcons
+import com.sportspulse.app.ui.components.TopBarHeight
 import com.sportspulse.app.ui.theme.OnTopBarBlack
 import com.sportspulse.app.ui.theme.TopBarBlack
 
@@ -81,33 +81,33 @@ fun ArticleWebViewScreen(
 
     Scaffold(
         topBar = {
-            // Bara custom, nu TopAppBar standard - avem nevoie de 2 linii (logo +
-            // titlul articolului), asa ca inaltimea se adapteaza automat la continut
-            // in loc sa fie fixa. Iconita de back e centrata pe toata inaltimea barei.
+            // Bara custom, aceeasi structura ca in FeedScreen: titlul centrat, iconitele pe
+            // margini (back stanga, share dreapta), inaltime fixa TopBarHeight (64dp).
             Surface(color = TopBarBlack) {
-                Row(
+                Box(
                     modifier = Modifier
                         .statusBarsPadding()
                         .fillMaxWidth()
-                        .padding(horizontal = 4.dp, vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                        .height(TopBarHeight)
+                        .padding(horizontal = 4.dp),
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        IconButton(onClick = onBack) {
-                            Icon(
-                                Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Inapoi",
-                                tint = OnTopBarBlack,
-                            )
-                        }
-                        Text(
-                            text = "SportsPulse",
-                            color = MaterialTheme.colorScheme.primary,
-                            fontWeight = FontWeight.ExtraBold,
-                            style = MaterialTheme.typography.headlineSmall,
+                    IconButton(
+                        onClick = onBack,
+                        modifier = Modifier.align(Alignment.CenterStart),
+                    ) {
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Inapoi",
+                            tint = OnTopBarBlack,
                         )
                     }
+                    Text(
+                        text = "SportsPulse",
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.ExtraBold,
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.align(Alignment.Center),
+                    )
                     IconButton(
                         onClick = {
                             val sendIntent = Intent(Intent.ACTION_SEND).apply {
@@ -116,6 +116,7 @@ fun ArticleWebViewScreen(
                             }
                             context.startActivity(Intent.createChooser(sendIntent, null))
                         },
+                        modifier = Modifier.align(Alignment.CenterEnd),
                     ) {
                         Icon(Icons.Filled.Share, contentDescription = "Trimite", tint = OnTopBarBlack)
                     }
