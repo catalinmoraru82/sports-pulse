@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -58,22 +57,26 @@ fun FeedScreen(
             // pe light theme verdele nu se vedea bine pe fundal alb, asta il pastreaza lizibil
             // pe ambele teme.
             Surface(color = TopBarBlack) {
-                Row(
+                // Titlul centrat pe orizontala (ca in Settings), iconita de setari ramane in dreapta.
+                // Box in loc de Row cu SpaceBetween: SpaceBetween ar fi lasat titlul in stanga.
+                Box(
                     modifier = Modifier
                         .statusBarsPadding()
                         .fillMaxWidth()
                         .height(TopBarHeight)
                         .padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
                         text = "SportsPulse",
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.ExtraBold,
                         style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.align(Alignment.Center),
                     )
-                    IconButton(onClick = onSettingsClick) {
+                    IconButton(
+                        onClick = onSettingsClick,
+                        modifier = Modifier.align(Alignment.CenterEnd),
+                    ) {
                         Icon(
                             imageVector = Icons.Filled.Settings,
                             contentDescription = "Setari",
