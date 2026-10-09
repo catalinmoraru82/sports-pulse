@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
@@ -21,13 +23,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sportspulse.app.data.model.Article
@@ -101,7 +108,11 @@ fun FeedScreen(
                     if (state.articles.isEmpty()) {
                         EmptyState()
                     } else {
-                        ArticleList(articles = state.articles, onArticleClick = onArticleClick)
+                        ArticleList(
+                            state = state,
+                            onArticleClick = onArticleClick,
+                            onLoadMore = { viewModel.loadMore() },
+                        )
                     }
                 }
             }
@@ -109,21 +120,72 @@ fun FeedScreen(
     }
 }
 
+// Cu cate elemente inainte de final incepem sa cerem lotul urmator - cerem din timp,
+// ca userul sa nu apuce sa ajunga la capatul listei si sa astepte.
+private const val LOAD_MORE_THRESHOLD = 3
+
 @Composable
 private fun ArticleList(
-    articles: List<Article>,
+    state: FeedUiState.Success,
     onArticleClick: (Article) -> Unit,
+    onLoadMore: () -> Unit,
 ) {
+    val listState = rememberLazyListState()
+
+    // true cand ultimul element vizibil e aproape de finalul listei
+    val nearEnd by remember {
+        derivedStateOf {
+            val info = listState.layoutInfo
+            val lastVisible = info.visibleItemsInfo.lastOrNull()?.index ?: return@derivedStateOf false
+            lastVisible >= info.totalItemsCount - LOAD_MORE_THRESHOLD
+        }
+    }
+
+    // Se re-evalueaza si cand lista creste (articles.size): daca dupa un lot userul e tot
+    // aproape de final (ex: lista scurta), se cere automat urmatorul, pana se umple ecranul.
+    // ViewModel-ul ignora apelurile cat timp un lot e deja in curs.
+    LaunchedEffect(nearEnd, state.articles.size) {
+        if (nearEnd && state.hasMore) onLoadMore()
+    }
+
     LazyColumn(
+        state = listState,
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        items(articles, key = { it.id }) { article ->
+        items(state.articles, key = { it.id }) { article ->
             ArticleCard(
                 article = article,
                 onClick = { onArticleClick(article) },
             )
+        }
+
+        if (state.isLoadingMore || state.loadMoreFailed) {
+            item(key = "load-more-footer") {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    if (state.loadMoreFailed) {
+                        TextButton(onClick = onLoadMore) {
+                            Text(
+                                text = "Nu am putut încărca mai multe articole. Încearcă din nou",
+                                color = MaterialTheme.colorScheme.onSurface,
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+                    } else {
+                        // onSurfaceVariant (negru pe light, alb pe dark) - verdele de accent
+                        // nu se vede pe fundalul alb din tema light
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(28.dp),
+                            strokeWidth = 3.dp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+            }
         }
     }
 }
