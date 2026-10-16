@@ -9,8 +9,12 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
@@ -43,6 +47,15 @@ private val DarkColorScheme = darkColorScheme(
     onBackground = OnSurfaceDark,
 )
 
+// Culorile textului pe cardurile vizitate - nu exista in ColorScheme-ul Material3, deci le
+// punem intr-un CompositionLocal propriu, setat in SportsPulseTheme in functie de tema.
+@Immutable
+data class VisitedTextColors(val title: Color, val body: Color)
+
+val LocalVisitedTextColors = staticCompositionLocalOf {
+    VisitedTextColors(title = VisitedTitleLight, body = VisitedBodyLight)
+}
+
 @Composable
 fun SportsPulseTheme(
     // Daca userul a ales explicit din Settings, respectam alegerea lui; altfel urmam sistemul.
@@ -74,9 +87,17 @@ fun SportsPulseTheme(
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = AppTypography,
-        content = content,
-    )
+    val visitedTextColors = if (darkTheme) {
+        VisitedTextColors(title = VisitedTitleDark, body = VisitedBodyDark)
+    } else {
+        VisitedTextColors(title = VisitedTitleLight, body = VisitedBodyLight)
+    }
+
+    CompositionLocalProvider(LocalVisitedTextColors provides visitedTextColors) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = AppTypography,
+            content = content,
+        )
+    }
 }

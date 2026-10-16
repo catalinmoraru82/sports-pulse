@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.sportspulse.app.data.local.VisitedArticlesStore
 import com.sportspulse.app.data.model.Article
+import com.sportspulse.app.ui.theme.LocalVisitedTextColors
 
 /**
  * Card articol - replica designul din Figma. Are doua variante:
@@ -45,6 +46,11 @@ fun ArticleCard(
     // Citirea directa a .value face acest Composable sa recompuna automat
     // cand markVisited() schimba starea global (ex: la intoarcerea din pagina de detaliu).
     val visited = VisitedArticlesStore.isVisited(article.id)
+
+    // Articolele citite au si textul mai estompat, nu doar fundalul (culorile vin din tema).
+    val visitedText = LocalVisitedTextColors.current
+    val titleColor = if (visited) visitedText.title else MaterialTheme.colorScheme.onSurface
+    val bodyColor = if (visited) visitedText.body else MaterialTheme.colorScheme.onSurfaceVariant
 
     Card(
         onClick = onClick,
@@ -84,7 +90,7 @@ fun ArticleCard(
                 Text(
                     text = article.title,
                     style = if (article.isHighlighted) MaterialTheme.typography.titleLarge else MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = titleColor,
                     maxLines = 5,
                     overflow = TextOverflow.Ellipsis,
                 )
@@ -95,7 +101,7 @@ fun ArticleCard(
                     Text(
                         text = cleanSummary,
                         style = if (article.isHighlighted) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = bodyColor,
                         maxLines = 7,
                         overflow = TextOverflow.Ellipsis,
                     )
@@ -106,6 +112,7 @@ fun ArticleCard(
                 ArticleMeta(
                     source = article.sourceName,
                     publishedAt = article.publishedAt,
+                    color = bodyColor,
                 )
             }
         }
@@ -128,27 +135,27 @@ private fun FeaturedBadge() {
 }
 
 @Composable
-private fun ArticleMeta(source: String?, publishedAt: String?) {
+private fun ArticleMeta(source: String?, publishedAt: String?, color: Color) {
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         if (!source.isNullOrBlank()) {
             Text(
                 text = source,
                 style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = color,
             )
         }
         if (!source.isNullOrBlank() && !publishedAt.isNullOrBlank()) {
             Box(
                 modifier = Modifier
                     .size(3.dp)
-                    .background(MaterialTheme.colorScheme.onSurfaceVariant, CircleShape),
+                    .background(color, CircleShape),
             )
         }
         if (!publishedAt.isNullOrBlank()) {
             Text(
                 text = relativeTime(publishedAt),
                 style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = color,
             )
         }
     }

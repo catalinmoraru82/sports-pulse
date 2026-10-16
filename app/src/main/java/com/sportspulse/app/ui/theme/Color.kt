@@ -1,6 +1,5 @@
 package com.sportspulse.app.ui.theme
 
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.ui.graphics.Color
 
 // ============================================================
@@ -26,6 +25,8 @@ val SurfaceContainerLight = Color(0xFFF2F2F5)
 // Ton pt cardurile "deja vizitate" - vizibil mai gri decat cardul normal de mai sus.
 val SurfaceContainerHighLight = Color(0xFFE5E5EA)
 val OnSurfaceLight = Color(0xFF1C1B1F)
+// Negru pur (nu gri mediu) pt text secundar (rezumat, meta-info) - contrast maxim
+// pe fundalul deschis, in linie cu restul schimbarilor de lizibilitate.
 val OnSurfaceVariantLight = Color(0xFF000000)
 val OutlineVariantLight = Color(0xFFE7E0EC)
 val ErrorLight = Color(0xFFBA1A1A)
@@ -42,9 +43,10 @@ val SurfaceContainerDark = Color(0xFF121418)
 // barei de progres neincarcate, #1A1D24), usor mai deschis decat containerul normal.
 val SurfaceContainerHighDark = Color(0xFF1A1D24)
 val OnSurfaceDark = Color(0xFFE6E1E5)
+// Alb pur (nu gri) pt text secundar pe dark - contrast maxim pe fundalul negru,
+// aceeasi logica ca la light theme de mai sus.
 val OnSurfaceVariantDark = Color(0xFFFFFFFF)
-//val OnSurfaceVariantDark = Color(0xFF8E939E)
-val OutlineVariantDark = Color(0xFF1F232B)
+val OutlineVariantDark = Color(0xFF323741)
 val ErrorDark = Color(0xFFFFB4AB)
 
 // --- Banda de sus (top bar) cu logo-ul "SportsPulse" ---
@@ -56,3 +58,11 @@ val ErrorDark = Color(0xFFFFB4AB)
 val TopBarBlack = Color(0xFF090A0C)
 // Text/iconite pe banda neagra - mereu deschise la culoare, indiferent de tema.
 val OnTopBarBlack = Color(0xFFE6E1E5)
+
+// --- Text pe cardurile "deja vizitate" ---
+// Textul unui articol citit e mai estompat decat al unuia necitit (titlul si rezumatul/meta,
+// separat). Contrast fata de fundalul cardului vizitat: min. 5:1, deci ramane lizibil.
+val VisitedTitleLight = Color(0xFF4A4A52)
+val VisitedBodyLight = Color(0xFF5F5F67)
+val VisitedTitleDark = Color(0xFFB4B7BF)
+val VisitedBodyDark = Color(0xFF8E939E)
