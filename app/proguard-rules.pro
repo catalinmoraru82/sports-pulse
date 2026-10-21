@@ -19,3 +19,8 @@
 -dontwarn okhttp3.**
 -dontwarn retrofit2.**
 -keepattributes Signature, Exceptions
+
+# Modelele JSON (@Serializable): le pastram intacte. Nu putem verifica aici in mod automat ca
+# R8 nu le strica, iar un feed gol in release ar fi greu de depistat - costul acestei reguli
+# e de cativa KB.
+-keep @kotlinx.serialization.Serializable class com.sportspulse.app.** { *; }

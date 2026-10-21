@@ -16,17 +16,29 @@ val localProperties = Properties().apply {
     }
 }
 
+// Semnarea build-ului de release: datele cheii se citesc din keystore.properties (in radacina
+// proiectului). Fisierul NU e in git - vezi keystore.properties.example si .gitignore.
+val keystoreProperties = Properties().apply {
+    val keystoreFile = rootProject.file("keystore.properties")
+    if (keystoreFile.exists()) {
+        FileInputStream(keystoreFile).use { load(it) }
+    }
+}
+
 android {
     namespace = "com.sportspulse.app"
-    compileSdk = 35
+    // Google Play cere targetSdk 36 pentru aplicatii noi (din 31 august 2026).
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.sportspulse.app"
         // Android 12 (API 31) e cel mai vechi OS suportat, conform cerintei.
         minSdk = 31
-        targetSdk = 35
+        targetSdk = 36
+        // versionCode trebuie sa creasca la FIECARE incarcare in Play Console (1, 2, 3...).
+        // versionName e doar textul afisat userilor.
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         // URL-ul admin-ului si cheia API sunt citite din local.properties,
         // NU sunt hardcodate in cod sursa (vezi local.properties.example).
@@ -34,6 +46,22 @@ android {
         val androidApiKey = localProperties.getProperty("ANDROID_API_KEY") ?: ""
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
         buildConfigField("String", "ANDROID_API_KEY", "\"$androidApiKey\"")
+    }
+
+    signingConfigs {
+        // Se creeaza doar daca exista keystore.properties. Fara el, build-ul de release iese
+        // nesemnat si poate fi semnat din Android Studio (Build > Generate Signed Bundle / APK).
+        if (keystoreProperties.isNotEmpty()) {
+            create("release") {
+                fun required(key: String) = requireNotNull(keystoreProperties.getProperty(key)) {
+                    "keystore.properties: lipseste valoarea pentru '$key'"
+                }
+                storeFile = rootProject.file(required("storeFile"))
+                storePassword = required("storePassword")
+                keyAlias = required("keyAlias")
+                keyPassword = required("keyPassword")
+            }
+        }
     }
 
     buildTypes {
@@ -44,6 +72,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfigs.findByName("release")?.let { signingConfig = it }
         }
         debug {
             isMinifyEnabled = false
@@ -78,7 +107,11 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material:material-icons-extended")
+    // material-icons-extended NU e nevoie - contine toate iconitele Material (mii),
+    // e o dependinta foarte mare (documentatia oficiala Google recomanda explicit
+    // sa nu fie inclusa direct). Folosim doar 3 iconite (Settings, ArrowBack,
+    // KeyboardArrowRight), toate deja incluse in material-icons-core (bundlat
+    // automat cu material3 mai sus) - eliminarea asta scade mult dimensiunea APK-ului.
 
     // Navigare intre ecrane
     implementation("androidx.navigation:navigation-compose:2.8.4")
@@ -102,4 +135,3 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
-tasks.register("prepareKotlinBuildScriptModel"){}
