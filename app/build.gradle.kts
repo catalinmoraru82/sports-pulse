@@ -135,3 +135,10 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
+
+// Ocolitor pentru un ciudat al sincronizarii din Android Studio: IDE-ul cere uneori taskul
+// "prepareKotlinBuildScriptModel" in acest proiect si da eroare daca lipseste. Il cream doar
+// daca nu exista deja (altfel Gradle da "task with that name already exists").
+if (tasks.findByName("prepareKotlinBuildScriptModel") == null) {
+    tasks.register("prepareKotlinBuildScriptModel") {}
+}
