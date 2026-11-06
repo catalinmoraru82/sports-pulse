@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.sportspulse.app-mergeDebugResources-54:/values-zh-rCN/values-zh-rCN.xml",
+            "outputFile": "com.sportspulse.app-mergeDebugResources-53:/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
                     "source": "D:\\stuff\\news\\sports-pulse\\.gradle\\caches\\8.13\\transforms\\0256268316d69616099c215e1ee7367f\\transformed\\foundation-release\\res\\values-zh-rCN\\values-zh-rCN.xml",

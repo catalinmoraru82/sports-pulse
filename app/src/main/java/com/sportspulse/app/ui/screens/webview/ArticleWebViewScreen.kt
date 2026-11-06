@@ -110,9 +110,12 @@ fun ArticleWebViewScreen(
                     )
                     IconButton(
                         onClick = {
+                            // Link-ul articolului + semnatura aplicatiei dedesubt. Link-ul Play Store se
+                            // construieste din packageName, deci ramane corect orice s-ar schimba.
+                            val playStoreUrl = "https://play.google.com/store/apps/details?id=${context.packageName}"
                             val sendIntent = Intent(Intent.ACTION_SEND).apply {
                                 type = "text/plain"
-                                putExtra(Intent.EXTRA_TEXT, url)
+                                putExtra(Intent.EXTRA_TEXT, "$url\n\nShared via SportsPulse: $playStoreUrl")
                             }
                             context.startActivity(Intent.createChooser(sendIntent, null))
                         },

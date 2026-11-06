@@ -1,8 +1,7 @@
-#Fri Oct 16 13:53:47 EEST 2026
+#Thu Oct 22 18:09:54 EEST 2026
 base.0=D\:\\stuff\\news\\sports-pulse\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\stuff\\news\\sports-pulse\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=D\:\\stuff\\news\\sports-pulse\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.11=D\:\\stuff\\news\\sports-pulse\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
 base.2=D\:\\stuff\\news\\sports-pulse\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
 base.3=D\:\\stuff\\news\\sports-pulse\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
 base.4=D\:\\stuff\\news\\sports-pulse\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\13\\classes.dex
@@ -14,7 +13,6 @@ base.9=D\:\\stuff\\news\\sports-pulse\\app\\build\\intermediates\\dex\\debug\\me
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=classes2.dex
-path.11=classes3.dex
 path.2=10/classes.dex
 path.3=11/classes.dex
 path.4=13/classes.dex
@@ -26,7 +24,6 @@ path.9=8/classes.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.10=classes11.dex
-renamed.11=classes12.dex
 renamed.2=classes3.dex
 renamed.3=classes4.dex
 renamed.4=classes5.dex

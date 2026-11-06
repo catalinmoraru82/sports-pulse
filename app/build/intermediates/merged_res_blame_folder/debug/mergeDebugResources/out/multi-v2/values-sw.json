@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.sportspulse.app-mergeDebugResources-54:/values-sw/values-sw.xml",
+            "outputFile": "com.sportspulse.app-mergeDebugResources-53:/values-sw/values-sw.xml",
             "map": [
                 {
                     "source": "D:\\stuff\\news\\sports-pulse\\.gradle\\caches\\8.13\\transforms\\1f6f58f896e3dc362f79fc7db044e903\\transformed\\material3-release\\res\\values-sw\\values-sw.xml",
