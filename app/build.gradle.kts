@@ -37,8 +37,8 @@ android {
         targetSdk = 36
         // versionCode trebuie sa creasca la FIECARE incarcare in Play Console (1, 2, 3...).
         // versionName e doar textul afisat userilor.
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
 
         // URL-ul admin-ului si cheia API sunt citite din local.properties,
         // NU sunt hardcodate in cod sursa (vezi local.properties.example).
