@@ -225,17 +225,6 @@ fun TermsScreen(onBack: () -> Unit) {
                     color = MaterialTheme.colorScheme.onSurface,
                 )
             }
-
-            Text(
-                text = "Document informativ, adaptat pentru aplicația Sports Pulse. Recomandăm " +
-                    "ca, înainte de publicarea în App Store / Google Play, acest document să fie " +
-                    "revizuit de un consultant juridic, mai ales în ceea ce privește secțiunile " +
-                    "referitoare la publicitate și eventuale date colectate în viitor (de " +
-                    "exemplu, dacă veți introduce notificări push sau conturi de utilizator).",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 32.dp, bottom = 24.dp),
-            )
         }
     }
 }
