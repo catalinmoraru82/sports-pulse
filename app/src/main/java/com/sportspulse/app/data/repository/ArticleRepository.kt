@@ -1,5 +1,7 @@
 package com.sportspulse.app.data.repository
 
+import androidx.annotation.StringRes
+import com.sportspulse.app.R
 import com.sportspulse.app.data.model.Article
 import com.sportspulse.app.data.remote.NetworkModule
 import kotlinx.coroutines.CancellationException
@@ -9,7 +11,9 @@ import java.io.IOException
 
 sealed interface ArticlesPageResult {
     data class Success(val articles: List<Article>, val hasMore: Boolean) : ArticlesPageResult
-    data class Error(val message: String) : ArticlesPageResult
+    // messageRes = text afisabil in UI (resursa din strings.xml); httpCode e folosit doar de
+    // mesajul generic pentru erori HTTP, care il include in text.
+    data class Error(@StringRes val messageRes: Int, val httpCode: Int? = null) : ArticlesPageResult
 }
 
 class ArticleRepository(
@@ -31,14 +35,14 @@ class ArticleRepository(
             throw e
         } catch (e: IOException) {
             // Fara conexiune la internet / server nedisponibil
-            ArticlesPageResult.Error("Nu am putut incarca articolele. Verifica conexiunea la internet.")
+            ArticlesPageResult.Error(R.string.error_no_connection)
         } catch (e: retrofit2.HttpException) {
             when (e.code()) {
-                401 -> ArticlesPageResult.Error("Acces neautorizat la feed.")
-                else -> ArticlesPageResult.Error("A aparut o eroare (${e.code()}).")
+                401 -> ArticlesPageResult.Error(R.string.error_unauthorized)
+                else -> ArticlesPageResult.Error(R.string.error_http, e.code())
             }
         } catch (e: Exception) {
-            ArticlesPageResult.Error("A aparut o eroare neasteptata.")
+            ArticlesPageResult.Error(R.string.error_unknown)
         }
     }
 

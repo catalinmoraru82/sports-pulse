@@ -1,5 +1,9 @@
 package com.sportspulse.app.ui.screens.settings
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -28,13 +32,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.sportspulse.app.R
 import com.sportspulse.app.ui.components.ForceStatusBarIcons
 import com.sportspulse.app.ui.components.TopBarHeight
 import com.sportspulse.app.ui.theme.ThemeState
 
 @Composable
 fun SettingsScreen(onBack: () -> Unit, onTermsClick: () -> Unit) {
+    val context = LocalContext.current
+    val contactEmail = stringResource(R.string.contact_email)
     // Fundalul acestui ecran urmeaza tema normal (spre deosebire de Feed/WebView, care
     // au banda neagra fixa) - reafirmam explicit iconitele corecte pt tema curenta,
     // altfel ar ramane cele albe fortate de ecranul anterior (Feed).
@@ -59,10 +68,10 @@ fun SettingsScreen(onBack: () -> Unit, onTermsClick: () -> Unit) {
                         onClick = onBack,
                         modifier = Modifier.align(Alignment.CenterStart),
                     ) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Inapoi")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
                     }
                     Text(
-                        text = "Setări",
+                        text = stringResource(R.string.settings_title),
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.align(Alignment.Center),
@@ -78,13 +87,13 @@ fun SettingsScreen(onBack: () -> Unit, onTermsClick: () -> Unit) {
                 .verticalScroll(rememberScrollState())
                 .padding(20.dp),
         ) {
-            SettingsSection(title = "Aspect") {
+            SettingsSection(title = stringResource(R.string.settings_section_appearance)) {
                 // Legat direct de ThemeState, care e citit din SportsPulseTheme la nivel de app -
                 // schimbarea aici se reflecta imediat in toata aplicatia, nu doar local pe acest ecran.
                 val systemDark = isSystemInDarkTheme()
                 val darkMode = ThemeState.darkModeOverride.value ?: systemDark
                 ToggleRow(
-                    label = "Dark mode",
+                    label = stringResource(R.string.settings_dark_mode),
                     checked = darkMode,
                     onCheckedChange = { ThemeState.darkModeOverride.value = it },
                 )
@@ -92,8 +101,21 @@ fun SettingsScreen(onBack: () -> Unit, onTermsClick: () -> Unit) {
 
             androidx.compose.foundation.layout.Spacer(Modifier.height(24.dp))
 
-            SettingsSection(title = "Info") {
-                LinkRow(label = "Termeni și condiții", showChevron = true, onClick = onTermsClick)
+            SettingsSection(title = stringResource(R.string.settings_section_info)) {
+                LinkRow(
+                    label = stringResource(R.string.terms_title),
+                    showChevron = true,
+                    onClick = onTermsClick,
+                )
+            }
+
+            androidx.compose.foundation.layout.Spacer(Modifier.height(24.dp))
+
+            SettingsSection(title = stringResource(R.string.settings_section_contact)) {
+                LinkRow(
+                    label = stringResource(R.string.settings_email_label),
+                    onClick = { openEmailApp(context, contactEmail) },
+                )
             }
         }
     }
@@ -153,5 +175,21 @@ private fun LinkRow(label: String, value: String? = null, showChevron: Boolean =
                 )
             }
         }
+    }
+}
+
+// ACTION_SENDTO cu schema mailto: face sa apara DOAR aplicatiile de email (nu si alte aplicatii
+// care stiu sa trimita text, cum ar fi mesageria). Daca userul nu are nicio aplicatie de email
+// instalata, startActivity arunca ActivityNotFoundException - il prindem si afisam un mesaj.
+private fun openEmailApp(context: android.content.Context, email: String) {
+    val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:$email"))
+    try {
+        context.startActivity(intent)
+    } catch (_: ActivityNotFoundException) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.settings_no_email_app, email),
+            Toast.LENGTH_LONG,
+        ).show()
     }
 }

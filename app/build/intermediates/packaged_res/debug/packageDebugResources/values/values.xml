@@ -2,7 +2,71 @@
 <resources>
     <color name="brand_accent">#C5F900</color>
     <color name="splash_background">#FFFBFE</color>
+    <plurals name="time_days_ago">
+        <item quantity="one">acum %1$d zi</item>
+        <item quantity="few">acum %1$d zile</item>
+        <item quantity="other">acum %1$d de zile</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">acum %1$d oră</item>
+        <item quantity="few">acum %1$d ore</item>
+        <item quantity="other">acum %1$d de ore</item>
+    </plurals>
+    <plurals name="time_weeks_ago">
+        <item quantity="one">acum %1$d săptămână</item>
+        <item quantity="few">acum %1$d săptămâni</item>
+        <item quantity="other">acum %1$d de săptămâni</item>
+    </plurals>
+    <string name="action_back">Înapoi</string>
+    <string name="action_retry">Încearcă din nou</string>
+    <string name="action_share">Trimite</string>
     <string name="app_name">SportsPulse</string>
+    <string name="contact_email" translatable="false">sportspulsenew@gmail.com</string>
+    <string name="error_http">A apărut o eroare (%1$d).</string>
+    <string name="error_no_connection">Nu am putut încărca articolele. Verifică conexiunea la internet.</string>
+    <string name="error_unauthorized">Acces neautorizat la feed.</string>
+    <string name="error_unknown">A apărut o eroare neașteptată.</string>
+    <string name="featured_label">RECOMANDAT</string>
+    <string name="feed_empty">Niciun articol publicat momentan.</string>
+    <string name="feed_load_more_failed">Nu am putut încărca mai multe articole. Încearcă din nou</string>
+    <string name="feed_settings_description">Setări</string>
+    <string name="settings_dark_mode">Mod întunecat</string>
+    <string name="settings_email_label">Email</string>
+    <string name="settings_no_email_app">Nu ai nicio aplicație de email instalată. Ne poți scrie la %1$s</string>
+    <string name="settings_section_appearance">Aspect</string>
+    <string name="settings_section_contact">Contactează-ne</string>
+    <string name="settings_section_info">Informații</string>
+    <string name="settings_title">Setări</string>
+    <string name="share_text">%1$s\n\nDistribuit prin SportsPulse: %2$s</string>
+    <string name="terms_heading">Termeni și Condiții de utilizare a Aplicației Sports Pulse</string>
+    <string name="terms_operator_note">Aplicația este dezvoltată și operată de Cătălin Moraru, persoană fizică, nu de o societate comercială înregistrată.</string>
+    <string name="terms_s10_body">Sports Pulse își rezervă dreptul de a modifica periodic prezentul document, pentru a reflecta schimbări legale, funcționale sau organizatorice. Versiunea actualizată va fi disponibilă în Aplicație, iar continuarea utilizării Aplicației după publicarea modificărilor constituie acceptarea acestora.</string>
+    <string name="terms_s10_heading">10. Modificarea termenilor</string>
+    <string name="terms_s11_body">Prezentele Termeni și Condiții sunt guvernate de legislația din România, indiferent de locația din care utilizatorul accesează Aplicația. Instanțele competente din România au jurisdicție exclusivă asupra oricăror dispute derivate din sau în legătură cu utilizarea Aplicației sau cu prezentul document.</string>
+    <string name="terms_s11_heading">11. Legislație aplicabilă și soluționarea litigiilor</string>
+    <string name="terms_s12_body">Pentru întrebări, sugestii sau reclamații legate de funcționarea Aplicației, ne puteți contacta prin informațiile disponibile în fișa aplicației din Google Play.</string>
+    <string name="terms_s12_heading">12. Contact</string>
+    <string name="terms_s1_body">Prin descărcarea, instalarea sau utilizarea aplicației Sports Pulse (\"Aplicația\"), sunteți de acord cu prezentele Termeni și Condiții de utilizare. Accesul și utilizarea Aplicației sunt condiționate de acceptarea, fără limitări sau rezerve, a acestor termeni și a legislației aplicabile. Dacă nu sunteți de acord cu acești termeni, vă rugăm să nu utilizați Aplicația.</string>
+    <string name="terms_s1_heading">1. Acceptarea termenilor</string>
+    <string name="terms_s2_body">Sports Pulse este o aplicație mobilă dedicată știrilor și informațiilor din domeniul sportiv. Aplicația centralizează, sintetizează și afișează informații sportive (rezultate, clasamente, articole, actualizări) provenite din surse publice sau din surse cu care Sports Pulse are acorduri, respectând regulile de citare și, unde este cazul, atașând link către sursa originală a informației.\n\nAtunci când Aplicația oferă acces la conținut al unor terți (de exemplu prin deschiderea unui articol într-un browser intern sau prin redirecționare către site-ul sursă), acel conținut rămâne proprietatea și responsabilitatea publicației care l-a produs. Sports Pulse nu își asumă răspunderea pentru corectitudinea, actualitatea sau caracterul complet al informațiilor furnizate de aceste surse terțe.</string>
+    <string name="terms_s2_heading">2. Despre Aplicație</string>
+    <string name="terms_s3_body">Aplicația, structura sa, elementele grafice, logo-ul, denumirea \"Sports Pulse\", precum și orice conținut original creat de echipa Sports Pulse (denumite în continuare \"Conținut\") sunt proprietatea Sports Pulse și sunt protejate de legislația privind dreptul de autor și proprietatea intelectuală. Excepție face conținutul provenit de la terți (site-uri de știri, surse sportive) accesat prin intermediul Aplicației, asupra căruia drepturile aparțin exclusiv acelor terți.\n\nEste interzisă copierea, reproducerea, distribuirea sau utilizarea Conținutului aparținând Sports Pulse fără acordul scris prealabil al acestuia, cu excepția utilizării normale, personale și necomerciale a Aplicației.</string>
+    <string name="terms_s3_heading">3. Proprietatea conținutului</string>
+    <string name="terms_s4_body">Sports Pulse respectă confidențialitatea utilizatorilor săi. Aplicația nu efectuează activități de tracking (urmărire a comportamentului utilizatorului) și nu utilizează servicii de analytics (precum Google Analytics sau similare) pentru monitorizarea utilizatorilor. Sports Pulse nu colectează, nu solicită și nu are acces la date care ar permite identificarea utilizatorului.\n\nAplicația poate stoca local, pe dispozitivul utilizatorului, anumite preferințe (de exemplu echipe sau competiții favorite) exclusiv în scopul personalizării experienței de utilizare, fără ca aceste informații să fie transmise către servere terțe în scop de profilare sau publicitate comportamentală.</string>
+    <string name="terms_s4_heading">4. Confidențialitate și date personale</string>
+    <string name="terms_s5_body">Aplicația este gratuită. Pentru susținerea serviciului, Sports Pulse poate publica, în prezent sau în viitor, postări de tip conținut sponsorizat (\"reclame\"), introduse direct prin platforma proprie de administrare a conținutului - nu printr-un SDK sau o rețea de publicitate terță (de exemplu Google AdMob sau similare). Aceste postări apar în Aplicație similar cu un articol obișnuit, marcate vizual ca fiind sponsorizate; la deschidere, redirecționează către pagina sponsorului, afișată în vizualizatorul intern (WebView) al Aplicației, exact ca la articolele obișnuite (secțiunea 4).\n\nDeoarece acest conținut este gestionat direct de Sports Pulse, el nu implică colectarea de identificatori de publicitate ai dispozitivului (de exemplu Advertising ID) și nu presupune profilare comportamentală din partea unor rețele terțe de publicitate. Eventualele statistici de vizualizare ale acestor postări sunt gestionate identic cu cele pentru articolele obișnuite (secțiunea 3) - anonim, fără asociere cu o identitate personală.\n\nSports Pulse nu girează și nu își asumă responsabilitatea pentru produsele, serviciile sau conținutul promovat prin postările sponsorizate.</string>
+    <string name="terms_s5_heading">5. Publicitate și conținut sponsorizat</string>
+    <string name="terms_s6_body">La momentul actual, Aplicația nu trimite notificări push. Sports Pulse își rezervă dreptul de a introduce, în viitor, un sistem de notificări (de exemplu pentru rezultate live, goluri sau știri de ultimă oră). Dacă un astfel de sistem va fi implementat, utilizatorii vor putea activa sau dezactiva notificările din setările Aplicației sau ale dispozitivului, iar prezentul document va fi actualizat corespunzător.</string>
+    <string name="terms_s6_heading">6. Notificări</string>
+    <string name="terms_s7_body">Sports Pulse depune eforturi rezonabile pentru a asigura funcționarea corectă și continuă a Aplicației, dar nu garantează accesul neîntrerupt, lipsa erorilor sau disponibilitatea permanentă a serviciului. Aplicația poate fi actualizată, modificată sau întreruptă temporar sau definitiv, fără notificare prealabilă.\n\nCosturile de trafic de date necesare pentru descărcarea și funcționarea Aplicației sunt suportate de utilizator, conform planului tarifar al furnizorului său de internet/telefonie.</string>
+    <string name="terms_s7_heading">7. Disponibilitatea și funcționarea Aplicației</string>
+    <string name="terms_s8_body">Sports Pulse nu poate fi făcut responsabil pentru daune directe sau indirecte rezultate din utilizarea Aplicației, din imposibilitatea de a o utiliza, din erori, întârzieri sau inexactități ale informațiilor prezentate, acestea din urmă fiind, în majoritatea cazurilor, preluate din surse terțe.\n\nUn utilizator care acționează pe baza informațiilor afișate în Aplicație (de exemplu rezultate, cote, program de meciuri) o face pe propria răspundere, Sports Pulse neputând fi tras la răspundere pentru eventuale prejudicii rezultate din utilizarea acestor informații.</string>
+    <string name="terms_s8_heading">8. Exonerarea de răspundere</string>
+    <string name="terms_s9_body">Aplicația poate conține legături către site-uri sau conținut aflate în proprietatea sau operate de terțe părți. Aceste legături sunt furnizate exclusiv pentru confortul utilizatorului. Sports Pulse nu controlează și nu răspunde pentru conținutul, politicile de confidențialitate sau securitatea acestor site-uri terțe și nu girează produsele, serviciile sau reclamele prezentate pe acestea.</string>
+    <string name="terms_s9_heading">9. Legături către site-uri terțe</string>
+    <string name="terms_title">Termeni și condiții</string>
+    <string name="time_just_now">chiar acum</string>
+    <string name="time_minutes_ago">acum %1$d min</string>
     <style name="Theme.SportsPulse" parent="android:Theme.Material.Light.NoActionBar"/>
     <style name="Theme.SportsPulse.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/splash_background</item>

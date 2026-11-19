@@ -1,3 +1,55 @@
 <resources>
     <string name="app_name">SportsPulse</string>
+
+    <!-- Comune -->
+    <string name="action_back">Înapoi</string>
+    <string name="action_share">Trimite</string>
+    <string name="action_retry">Încearcă din nou</string>
+
+    <!-- Feed -->
+    <string name="feed_settings_description">Setări</string>
+    <string name="feed_empty">Niciun articol publicat momentan.</string>
+    <string name="feed_load_more_failed">Nu am putut încărca mai multe articole. Încearcă din nou</string>
+    <string name="featured_label">RECOMANDAT</string>
+
+    <!-- Erori la încărcarea articolelor -->
+    <string name="error_no_connection">Nu am putut încărca articolele. Verifică conexiunea la internet.</string>
+    <string name="error_unauthorized">Acces neautorizat la feed.</string>
+    <string name="error_http">A apărut o eroare (%1$d).</string>
+    <string name="error_unknown">A apărut o eroare neașteptată.</string>
+
+    <!-- Timp relativ ("acum 2 ore"). Româna cere "de" de la 20 în sus: "acum 20 de ore". -->
+    <string name="time_just_now">chiar acum</string>
+    <string name="time_minutes_ago">acum %1$d min</string>
+    <plurals name="time_hours_ago">
+        <item quantity="one">acum %1$d oră</item>
+        <item quantity="few">acum %1$d ore</item>
+        <item quantity="other">acum %1$d de ore</item>
+    </plurals>
+    <plurals name="time_days_ago">
+        <item quantity="one">acum %1$d zi</item>
+        <item quantity="few">acum %1$d zile</item>
+        <item quantity="other">acum %1$d de zile</item>
+    </plurals>
+    <plurals name="time_weeks_ago">
+        <item quantity="one">acum %1$d săptămână</item>
+        <item quantity="few">acum %1$d săptămâni</item>
+        <item quantity="other">acum %1$d de săptămâni</item>
+    </plurals>
+
+    <!-- Distribuire articol: %1$s = link articol, %2$s = link Play Store -->
+    <string name="share_text">%1$s\n\nDistribuit prin SportsPulse: %2$s</string>
+
+    <!-- Setări -->
+    <string name="settings_title">Setări</string>
+    <string name="settings_section_appearance">Aspect</string>
+    <string name="settings_dark_mode">Mod întunecat</string>
+    <string name="settings_section_info">Informații</string>
+    <string name="settings_section_contact">Contactează-ne</string>
+    <string name="settings_email_label">Email</string>
+    <string name="settings_no_email_app">Nu ai nicio aplicație de email instalată. Ne poți scrie la %1$s</string>
+    <string name="contact_email" translatable="false">sportspulsenew@gmail.com</string>
+
+    <!-- Termeni și condiții (textul complet e în strings_terms.xml) -->
+    <string name="terms_title">Termeni și condiții</string>
 </resources>

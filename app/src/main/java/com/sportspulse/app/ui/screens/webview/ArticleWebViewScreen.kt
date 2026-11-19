@@ -1,7 +1,11 @@
 package com.sportspulse.app.ui.screens.webview
 
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.compose.BackHandler
@@ -33,9 +37,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.sportspulse.app.R
 import com.sportspulse.app.data.local.VisitedArticlesStore
 import com.sportspulse.app.data.repository.ArticleRepository
 import com.sportspulse.app.ui.components.ForceStatusBarIcons
@@ -97,12 +103,12 @@ fun ArticleWebViewScreen(
                     ) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Inapoi",
+                            contentDescription = stringResource(R.string.action_back),
                             tint = OnTopBarBlack,
                         )
                     }
                     Text(
-                        text = "SportsPulse",
+                        text = stringResource(R.string.app_name),
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.ExtraBold,
                         style = MaterialTheme.typography.headlineSmall,
@@ -115,13 +121,13 @@ fun ArticleWebViewScreen(
                             val playStoreUrl = "https://play.google.com/store/apps/details?id=${context.packageName}"
                             val sendIntent = Intent(Intent.ACTION_SEND).apply {
                                 type = "text/plain"
-                                putExtra(Intent.EXTRA_TEXT, "$url\n\nShared via SportsPulse: $playStoreUrl")
+                                putExtra(Intent.EXTRA_TEXT, context.getString(R.string.share_text, url, playStoreUrl))
                             }
                             context.startActivity(Intent.createChooser(sendIntent, null))
                         },
                         modifier = Modifier.align(Alignment.CenterEnd),
                     ) {
-                        Icon(Icons.Filled.Share, contentDescription = "Trimite", tint = OnTopBarBlack)
+                        Icon(Icons.Filled.Share, contentDescription = stringResource(R.string.action_share), tint = OnTopBarBlack)
                     }
                 }
             }
@@ -134,6 +140,11 @@ fun ArticleWebViewScreen(
                         settings.javaScriptEnabled = true
                         settings.domStorageEnabled = true
                         webViewClient = object : WebViewClient() {
+                            override fun shouldOverrideUrlLoading(
+                                view: WebView,
+                                request: WebResourceRequest,
+                            ): Boolean = handleUrl(view, request.url)
+
                             override fun onPageFinished(view: WebView?, finishedUrl: String?) {
                                 isLoading = false
                             }
@@ -149,6 +160,16 @@ fun ArticleWebViewScreen(
                     }
                 },
                 modifier = Modifier.fillMaxSize(),
+                // Apelat cand ecranul iese din compozitie (back / navigare in alta parte): oprim
+                // incarcarea, scoatem callback-urile si eliberam WebView-ul (altfel ramane in
+                // memorie, cu JavaScript si conexiuni active, pana la GC).
+                onRelease = { view ->
+                    webView = null
+                    view.stopLoading()
+                    view.webViewClient = WebViewClient()
+                    view.webChromeClient = null
+                    view.destroy()
+                },
             )
 
             if (isLoading) {
@@ -165,5 +186,75 @@ fun ArticleWebViewScreen(
                 )
             }
         }
+    }
+}
+
+/**
+ * Decide ce se intampla cand pagina din WebView incearca sa navigheze la [uri].
+ * Returneaza true = am tratat noi navigarea (WebView-ul nu o mai incarca), false = o incarca el.
+ *
+ * - http/https: ramane in WebView, comportament normal.
+ * - intent:  linkuri "intent://..." (ex: deschide aplicatia sursei). Se deschide aplicatia daca e
+ *            instalata; altfel se foloseste browser_fallback_url, daca pagina a trimis unul.
+ * - mailto:/tel:/sms:/geo:/market: etc.: se paseaza aplicatiei potrivite din telefon.
+ * - file:/content:: blocate. Orice alta schema necunoscuta: se incearca deschiderea cu o aplicatie din
+ *   telefon; daca nu exista niciuna, nu se intampla nimic (nu apare ERR_UNKNOWN_URL_SCHEME).
+ */
+private fun handleUrl(view: WebView, uri: Uri): Boolean {
+    return when (uri.scheme?.lowercase()) {
+        "http", "https" -> false
+        // about:blank, data:, javascript: si blob: sunt folosite intern de pagini - le lasam in pace.
+        "about", "data", "javascript", "blob" -> false
+        // Acces la fisiere/continut local din aplicatie: o pagina web nu are ce cauta aici - blocat.
+        "file", "content" -> true
+        "intent" -> {
+            openIntentUrl(view, uri.toString())
+            true
+        }
+        "mailto" -> {
+            startExternal(view.context, Intent(Intent.ACTION_SENDTO, uri))
+            true
+        }
+        else -> {
+            startExternal(view.context, Intent(Intent.ACTION_VIEW, uri))
+            true
+        }
+    }
+}
+
+private fun openIntentUrl(view: WebView, url: String) {
+    val intent = try {
+        Intent.parseUri(url, Intent.URI_INTENT_SCHEME)
+    } catch (_: Exception) {
+        return // URL "intent:" malformat - il ignoram
+    }
+
+    // Masuri de siguranta standard: o pagina web nu trebuie sa poata tinti o componenta
+    // anume din aplicatia noastra sau din alta aplicatie, ci doar sa deschida ceva "browsable".
+    intent.addCategory(Intent.CATEGORY_BROWSABLE)
+    intent.component = null
+    intent.selector = null
+
+    if (startExternal(view.context, intent)) return
+
+    // Aplicatia nu e instalata: folosim fallback-ul oferit de pagina, daca exista si e web.
+    val fallback = intent.getStringExtra("browser_fallback_url")
+    if (fallback != null) {
+        val fallbackUri = Uri.parse(fallback)
+        if (fallbackUri.scheme == "http" || fallbackUri.scheme == "https") {
+            view.loadUrl(fallback)
+        }
+    }
+}
+
+// true daca s-a gasit o aplicatie care sa deschida intentul, false daca nu exista niciuna.
+private fun startExternal(context: Context, intent: Intent): Boolean {
+    return try {
+        context.startActivity(intent)
+        true
+    } catch (_: ActivityNotFoundException) {
+        false
+    } catch (_: SecurityException) {
+        false
     }
 }

@@ -1,5 +1,6 @@
 package com.sportspulse.app.ui.screens.feed
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sportspulse.app.data.model.Article
@@ -23,7 +24,7 @@ sealed interface FeedUiState {
         val isLoadingMore: Boolean = false,
         val loadMoreFailed: Boolean = false,
     ) : FeedUiState
-    data class Error(val message: String) : FeedUiState
+    data class Error(@StringRes val messageRes: Int, val httpCode: Int? = null) : FeedUiState
 }
 
 class FeedViewModel(
@@ -108,7 +109,7 @@ class FeedViewModel(
                     hasMore = result.hasMore,
                 )
             }
-            is ArticlesPageResult.Error -> _uiState.value = FeedUiState.Error(result.message)
+            is ArticlesPageResult.Error -> _uiState.value = FeedUiState.Error(result.messageRes, result.httpCode)
         }
     }
 }

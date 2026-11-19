@@ -22,9 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.sportspulse.app.R
 import com.sportspulse.app.data.local.VisitedArticlesStore
 import com.sportspulse.app.data.model.Article
 import com.sportspulse.app.ui.theme.LocalVisitedTextColors
@@ -127,7 +130,7 @@ private fun FeaturedBadge() {
             .padding(horizontal = 10.dp, vertical = 4.dp),
     ) {
         Text(
-            text = "FEATURED",
+            text = stringResource(R.string.featured_label),
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.onPrimary,
         )
@@ -153,7 +156,7 @@ private fun ArticleMeta(source: String?, publishedAt: String?, color: Color) {
         }
         if (!publishedAt.isNullOrBlank()) {
             Text(
-                text = relativeTime(publishedAt),
+                text = relativeTime(LocalContext.current.resources, publishedAt),
                 style = MaterialTheme.typography.labelSmall,
                 color = color,
             )

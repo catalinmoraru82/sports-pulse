@@ -33,10 +33,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.sportspulse.app.R
 import com.sportspulse.app.data.model.Article
 import com.sportspulse.app.ui.components.ArticleCard
 import com.sportspulse.app.ui.components.ForceStatusBarIcons
@@ -74,7 +76,7 @@ fun FeedScreen(
                         .padding(horizontal = 16.dp),
                 ) {
                     Text(
-                        text = "SportsPulse",
+                        text = stringResource(R.string.app_name),
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.ExtraBold,
                         style = MaterialTheme.typography.headlineSmall,
@@ -86,7 +88,7 @@ fun FeedScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Settings,
-                            contentDescription = "Setari",
+                            contentDescription = stringResource(R.string.feed_settings_description),
                             tint = OnTopBarBlack,
                         )
                     }
@@ -103,7 +105,7 @@ fun FeedScreen(
         ) {
             when (val state = uiState) {
                 is FeedUiState.Loading -> LoadingState()
-                is FeedUiState.Error -> ErrorState(state.message, onRetry = { viewModel.loadArticles() })
+                is FeedUiState.Error -> ErrorState(feedErrorText(state), onRetry = { viewModel.loadArticles() })
                 is FeedUiState.Success -> {
                     if (state.articles.isEmpty()) {
                         EmptyState()
@@ -170,7 +172,7 @@ private fun ArticleList(
                     if (state.loadMoreFailed) {
                         TextButton(onClick = onLoadMore) {
                             Text(
-                                text = "Nu am putut încărca mai multe articole. Încearcă din nou",
+                                text = stringResource(R.string.feed_load_more_failed),
                                 color = MaterialTheme.colorScheme.onSurface,
                                 textAlign = TextAlign.Center,
                             )
@@ -200,6 +202,13 @@ private fun LoadingState() {
     }
 }
 
+// Mesajul de eroare vine ca ID de resursa (+ cod HTTP optional), ca sa fie tradus in UI.
+@Composable
+private fun feedErrorText(error: FeedUiState.Error): String {
+    val code = error.httpCode
+    return if (code != null) stringResource(error.messageRes, code) else stringResource(error.messageRes)
+}
+
 @Composable
 private fun ErrorState(message: String, onRetry: () -> Unit) {
     Box(
@@ -214,7 +223,7 @@ private fun ErrorState(message: String, onRetry: () -> Unit) {
             )
             androidx.compose.foundation.layout.Spacer(Modifier.height(12.dp))
             androidx.compose.material3.TextButton(onClick = onRetry) {
-                Text("Incearca din nou", color = MaterialTheme.colorScheme.primary)
+                Text(stringResource(R.string.action_retry), color = MaterialTheme.colorScheme.primary)
             }
         }
     }
@@ -227,7 +236,7 @@ private fun EmptyState() {
         contentAlignment = Alignment.Center,
     ) {
         Text(
-            text = "Niciun articol publicat momentan.",
+            text = stringResource(R.string.feed_empty),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
