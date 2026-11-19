@@ -4,6 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- screenOrientation="portrait" face ca Google Play sa deduca ca aplicatia CERE un ecran
+         portret si sa o ascunda de dispozitive fara el (tablete, desktop, Android XR).
+         required="false" o face disponibila peste tot; blocarea pe portret ramane activa. -->
+    <uses-feature
+        android:name="android.hardware.screen.portrait"
+        android:required="false" />
+
     <application
         android:name=".SportsPulseApp"
         android:allowBackup="true"
